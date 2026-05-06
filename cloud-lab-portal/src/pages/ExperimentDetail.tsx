@@ -32,10 +32,10 @@ const ExperimentDetail = () => {
           Back_to_Dashboard
         </Link>
         
-        <div className="flex flex-wrap gap-3">
+        <div className="flex overflow-x-auto pb-2 md:pb-0 gap-3 snap-x scrollbar-hide">
           <button
             onClick={() => toggleCompletion(experiment.id)}
-            className={`flex items-center px-4 py-2 rounded font-mono text-xs font-bold transition-all border ${
+            className={`flex-shrink-0 snap-start whitespace-nowrap flex items-center px-4 py-2 rounded font-mono text-xs font-bold transition-all border ${
               completed 
                 ? 'bg-green-500/10 text-green-500 border-green-500/50' 
                 : 'bg-gray-800 text-gray-500 border-gray-700 hover:border-gray-500'
@@ -55,14 +55,14 @@ const ExperimentDetail = () => {
             href={experiment.sourceUrl} 
             target="_blank" 
             rel="noopener noreferrer"
-            className="flex items-center px-4 py-2 rounded font-mono text-xs font-bold bg-gray-800 text-gray-500 border border-gray-700 hover:border-blue-500 hover:text-blue-400 transition-all"
+            className="flex-shrink-0 snap-start whitespace-nowrap flex items-center px-4 py-2 rounded font-mono text-xs font-bold bg-gray-800 text-gray-500 border border-gray-700 hover:border-blue-500 hover:text-blue-400 transition-all"
           >
             SOURCE_URL
           </a>
           
           <button
             onClick={() => setIsRevisionMode(!isRevisionMode)}
-            className={`flex items-center px-4 py-2 rounded font-mono text-xs font-bold transition-all border ${
+            className={`flex-shrink-0 snap-start whitespace-nowrap flex items-center px-4 py-2 rounded font-mono text-xs font-bold transition-all border ${
               isRevisionMode 
                 ? 'bg-blue-600 text-white border-blue-500' 
                 : 'bg-gray-800 text-gray-500 border-gray-700 hover:border-gray-500'

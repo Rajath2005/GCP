@@ -210,7 +210,7 @@ const InteractiveStepViewer = ({ tasks, architecture }: InteractiveStepViewerPro
                         </div>
                         <button
                           onClick={() => copyToClipboard(step.command!)}
-                          className="absolute right-3 bottom-3 p-1.5 rounded bg-gray-800 text-gray-500 hover:text-blue-400 border border-gray-700 opacity-0 group-hover/cmd:opacity-100 transition-all flex items-center space-x-2 text-[10px] font-bold"
+                          className="absolute right-3 bottom-3 p-1.5 rounded bg-gray-800 text-gray-500 hover:text-blue-400 border border-gray-700 opacity-100 md:opacity-0 md:group-hover/cmd:opacity-100 transition-all flex items-center space-x-2 text-[10px] font-bold"
                         >
                           <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />

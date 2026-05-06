@@ -81,7 +81,7 @@ const renderArchitectureView = (view: ArchitectureView, layout?: ArchitectureLay
   const nodeMap = new Map(adjustedNodes.map((node) => [node.id, node]));
 
   return (
-    <div className="relative w-full h-full min-h-[300px]">
+    <div className="relative w-full h-full min-h-[200px] md:min-h-[300px]">
       <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
         {view.edges.map((edge) => {
           const from = nodeMap.get(edge.from);
@@ -149,7 +149,7 @@ const ArchitectureCanvas = ({
   const resolvedView = viewMode === 'detail' && detailView ? detailView : architecture?.overview;
 
   return (
-    <div className="w-full h-full min-h-[420px] bg-[#0b1220] rounded-lg border border-[#1f2a3a] p-6 relative overflow-hidden flex flex-col">
+    <div className="w-full h-full min-h-[250px] md:min-h-[420px] bg-[#0b1220] rounded-lg border border-[#1f2a3a] p-6 relative overflow-hidden flex flex-col">
       <div className="absolute inset-0 pointer-events-none blueprint-grid" />
       <div className="absolute inset-0 pointer-events-none blueprint-glow" />
       <div className="absolute inset-0 pointer-events-none blueprint-scan" />
