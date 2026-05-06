@@ -1,8 +1,23 @@
+export type AnimationTrigger = 
+  | 'CREATE_VM' 
+  | 'INSTALL_NGINX' 
+  | 'CREATE_BUCKET' 
+  | 'UPLOAD_FILE' 
+  | 'MAKE_PUBLIC'
+  | 'CONNECT_DB' 
+  | 'CREATE_DB'
+  | 'PUBLISH_MSG'
+  | 'CREATE_VPC'
+  | 'PEER_VPC'
+  | 'DEPLOY_FUNCTION'
+  | 'CREATE_CLUSTER';
+
 export interface DetailedStep {
   description: string;
   command?: string;
   codeBlock?: string;
   expectedOutput?: string;
+  animationTrigger?: AnimationTrigger;
 }
 
 export interface Task {

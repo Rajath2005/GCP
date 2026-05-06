@@ -14,7 +14,10 @@
         { "description": "Set Machine Type to 'e2-medium'." },
         { "description": "Set Boot Disk to 'Debian GNU/Linux 12 (bookworm)'." },
         { "description": "In the Firewall section, check 'Allow HTTP traffic'." },
-        { "description": "Click 'Create' and wait for the instance to be provisioned." }
+        { 
+          "description": "Click 'Create' and wait for the instance to be provisioned.",
+          "animationTrigger": "CREATE_VM"
+        }
       ]
     },
     {
@@ -27,7 +30,8 @@
         },
         { 
           "description": "Install the NGINX web server.",
-          "command": "sudo apt-get install -y nginx"
+          "command": "sudo apt-get install -y nginx",
+          "animationTrigger": "INSTALL_NGINX"
         },
         { 
           "description": "Verify that NGINX is running.",
