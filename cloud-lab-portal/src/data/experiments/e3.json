@@ -38,6 +38,160 @@
       ]
     }
   ],
+  "architecture": {
+    "tasks": [
+      {
+        "overview": {
+          "nodes": [
+            { "id": "user", "label": "Developer", "type": "user", "x": 12, "y": 55, "size": "sm" },
+            { "id": "shell", "label": "Cloud Shell", "type": "ops", "x": 35, "y": 40 },
+            { "id": "apis", "label": "Service APIs", "type": "ops", "x": 72, "y": 48, "size": "lg" }
+          ],
+          "edges": [
+            { "id": "user-shell", "from": "user", "to": "shell", "style": "dashed", "animated": true },
+            { "id": "shell-apis", "from": "shell", "to": "apis", "animated": true }
+          ]
+        },
+        "detail": [
+          {
+            "stepIndex": 0,
+            "title": "Open Shell",
+            "nodes": [
+              { "id": "user", "label": "Developer", "type": "user", "x": 12, "y": 55, "size": "sm" },
+              { "id": "shell", "label": "Cloud Shell", "type": "ops", "x": 38, "y": 40 }
+            ],
+            "edges": [
+              { "id": "user-shell", "from": "user", "to": "shell", "style": "dashed", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 1,
+            "title": "Enable APIs",
+            "nodes": [
+              { "id": "shell", "label": "Cloud Shell", "type": "ops", "x": 30, "y": 40 },
+              { "id": "apis", "label": "Service APIs", "type": "ops", "x": 70, "y": 48, "size": "lg" }
+            ],
+            "edges": [
+              { "id": "shell-apis", "from": "shell", "to": "apis", "animated": true }
+            ]
+          }
+        ]
+      },
+      {
+        "overview": {
+          "nodes": [
+            { "id": "user", "label": "Developer", "type": "user", "x": 10, "y": 55, "size": "sm" },
+            { "id": "shell", "label": "Cloud Shell", "type": "ops", "x": 30, "y": 40 },
+            { "id": "function", "label": "HTTP Function", "type": "serverless", "x": 65, "y": 45, "size": "lg" },
+            { "id": "client", "label": "Trigger URL", "type": "app", "x": 88, "y": 60, "size": "sm" }
+          ],
+          "edges": [
+            { "id": "user-shell", "from": "user", "to": "shell", "style": "dashed", "animated": true },
+            { "id": "shell-function", "from": "shell", "to": "function", "animated": true },
+            { "id": "function-client", "from": "function", "to": "client", "style": "dashed", "animated": true }
+          ]
+        },
+        "detail": [
+          {
+            "stepIndex": 0,
+            "title": "Prep Directory",
+            "nodes": [
+              { "id": "shell", "label": "Cloud Shell", "type": "ops", "x": 35, "y": 40 },
+              { "id": "function", "label": "HTTP Function", "type": "serverless", "x": 70, "y": 48, "size": "lg" }
+            ],
+            "edges": [
+              { "id": "shell-function", "from": "shell", "to": "function", "style": "dashed", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 1,
+            "title": "Write Code",
+            "nodes": [
+              { "id": "shell", "label": "Cloud Shell", "type": "ops", "x": 35, "y": 40 },
+              { "id": "function", "label": "HTTP Function", "type": "serverless", "x": 70, "y": 48, "size": "lg" }
+            ],
+            "edges": [
+              { "id": "shell-function", "from": "shell", "to": "function", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 2,
+            "title": "Deploy",
+            "nodes": [
+              { "id": "shell", "label": "Cloud Shell", "type": "ops", "x": 30, "y": 40 },
+              { "id": "function", "label": "HTTP Function", "type": "serverless", "x": 65, "y": 45, "size": "lg" }
+            ],
+            "edges": [
+              { "id": "shell-function", "from": "shell", "to": "function", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 3,
+            "title": "Invoke",
+            "nodes": [
+              { "id": "function", "label": "HTTP Function", "type": "serverless", "x": 55, "y": 45, "size": "lg" },
+              { "id": "client", "label": "Trigger URL", "type": "app", "x": 85, "y": 60, "size": "sm" }
+            ],
+            "edges": [
+              { "id": "function-client", "from": "function", "to": "client", "animated": true }
+            ]
+          }
+        ]
+      },
+      {
+        "overview": {
+          "nodes": [
+            { "id": "user", "label": "Developer", "type": "user", "x": 10, "y": 55, "size": "sm" },
+            { "id": "shell", "label": "Cloud Shell", "type": "ops", "x": 30, "y": 40 },
+            { "id": "bucket", "label": "Storage Bucket", "type": "storage", "x": 60, "y": 40, "size": "lg" },
+            { "id": "function", "label": "Storage Function", "type": "serverless", "x": 80, "y": 62, "size": "sm" }
+          ],
+          "edges": [
+            { "id": "user-shell", "from": "user", "to": "shell", "style": "dashed", "animated": true },
+            { "id": "shell-bucket", "from": "shell", "to": "bucket", "animated": true },
+            { "id": "bucket-function", "from": "bucket", "to": "function", "animated": true }
+          ]
+        },
+        "detail": [
+          {
+            "stepIndex": 0,
+            "title": "Create Bucket",
+            "nodes": [
+              { "id": "shell", "label": "Cloud Shell", "type": "ops", "x": 30, "y": 40 },
+              { "id": "bucket", "label": "Storage Bucket", "type": "storage", "x": 65, "y": 40, "size": "lg" }
+            ],
+            "edges": [
+              { "id": "shell-bucket", "from": "shell", "to": "bucket", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 1,
+            "title": "Deploy Trigger",
+            "nodes": [
+              { "id": "bucket", "label": "Storage Bucket", "type": "storage", "x": 50, "y": 40, "size": "lg" },
+              { "id": "function", "label": "Storage Function", "type": "serverless", "x": 82, "y": 62, "size": "sm" }
+            ],
+            "edges": [
+              { "id": "bucket-function", "from": "bucket", "to": "function", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 2,
+            "title": "Upload File",
+            "nodes": [
+              { "id": "shell", "label": "Cloud Shell", "type": "ops", "x": 30, "y": 40 },
+              { "id": "bucket", "label": "Storage Bucket", "type": "storage", "x": 60, "y": 40, "size": "lg" },
+              { "id": "function", "label": "Storage Function", "type": "serverless", "x": 82, "y": 62, "size": "sm" }
+            ],
+            "edges": [
+              { "id": "shell-bucket", "from": "shell", "to": "bucket", "animated": true },
+              { "id": "bucket-function", "from": "bucket", "to": "function", "style": "dashed", "animated": true }
+            ]
+          }
+        ]
+      }
+    ]
+  },
   "commands": [
     { "cmd": "gcloud functions deploy ... --gen2", "purpose": "Deploy a 2nd generation function" },
     { "cmd": "gsutil mb gs://[BUCKET]", "purpose": "Create a storage bucket" }

@@ -22,6 +22,119 @@
       ]
     }
   ],
+  "architecture": {
+    "tasks": [
+      {
+        "overview": {
+          "nodes": [
+            { "id": "user", "label": "Developer", "type": "user", "x": 12, "y": 55, "size": "sm" },
+            { "id": "shell", "label": "Cloud Shell", "type": "ops", "x": 35, "y": 40 },
+            { "id": "bucket", "label": "Bucket", "type": "storage", "x": 65, "y": 45, "size": "lg" },
+            { "id": "object", "label": "Object", "type": "storage", "x": 85, "y": 65, "size": "sm" }
+          ],
+          "edges": [
+            { "id": "user-shell", "from": "user", "to": "shell", "style": "dashed", "animated": true },
+            { "id": "shell-bucket", "from": "shell", "to": "bucket", "animated": true },
+            { "id": "bucket-object", "from": "bucket", "to": "object", "style": "dashed", "animated": true }
+          ]
+        },
+        "detail": [
+          {
+            "stepIndex": 0,
+            "title": "Create Bucket",
+            "nodes": [
+              { "id": "shell", "label": "Cloud Shell", "type": "ops", "x": 35, "y": 40 },
+              { "id": "bucket", "label": "Bucket", "type": "storage", "x": 68, "y": 45, "size": "lg" }
+            ],
+            "edges": [
+              { "id": "shell-bucket", "from": "shell", "to": "bucket", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 1,
+            "title": "Download Image",
+            "nodes": [
+              { "id": "shell", "label": "Cloud Shell", "type": "ops", "x": 40, "y": 40 },
+              { "id": "object", "label": "Local File", "type": "app", "x": 72, "y": 55, "size": "sm" }
+            ],
+            "edges": [
+              { "id": "shell-object", "from": "shell", "to": "object", "style": "dashed", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 2,
+            "title": "Upload",
+            "nodes": [
+              { "id": "bucket", "label": "Bucket", "type": "storage", "x": 60, "y": 45, "size": "lg" },
+              { "id": "object", "label": "Object", "type": "storage", "x": 85, "y": 65, "size": "sm" }
+            ],
+            "edges": [
+              { "id": "bucket-object", "from": "bucket", "to": "object", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 3,
+            "title": "List",
+            "nodes": [
+              { "id": "shell", "label": "Cloud Shell", "type": "ops", "x": 35, "y": 40 },
+              { "id": "bucket", "label": "Bucket", "type": "storage", "x": 70, "y": 45, "size": "lg" }
+            ],
+            "edges": [
+              { "id": "shell-bucket", "from": "shell", "to": "bucket", "style": "dashed", "animated": true }
+            ]
+          }
+        ]
+      },
+      {
+        "overview": {
+          "nodes": [
+            { "id": "user", "label": "Viewer", "type": "user", "x": 12, "y": 55, "size": "sm" },
+            { "id": "object", "label": "Object", "type": "storage", "x": 55, "y": 45, "size": "lg" },
+            { "id": "public", "label": "Public URL", "type": "app", "x": 82, "y": 60, "size": "sm" }
+          ],
+          "edges": [
+            { "id": "object-public", "from": "object", "to": "public", "animated": true },
+            { "id": "user-public", "from": "user", "to": "public", "style": "dashed", "animated": true }
+          ]
+        },
+        "detail": [
+          {
+            "stepIndex": 0,
+            "title": "Make Public",
+            "nodes": [
+              { "id": "object", "label": "Object", "type": "storage", "x": 55, "y": 45, "size": "lg" },
+              { "id": "public", "label": "Public URL", "type": "app", "x": 82, "y": 60, "size": "sm" }
+            ],
+            "edges": [
+              { "id": "object-public", "from": "object", "to": "public", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 1,
+            "title": "Verify",
+            "nodes": [
+              { "id": "user", "label": "Viewer", "type": "user", "x": 12, "y": 55, "size": "sm" },
+              { "id": "public", "label": "Public URL", "type": "app", "x": 70, "y": 55, "size": "lg" }
+            ],
+            "edges": [
+              { "id": "user-public", "from": "user", "to": "public", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 2,
+            "title": "Revoke",
+            "nodes": [
+              { "id": "object", "label": "Object", "type": "storage", "x": 55, "y": 45, "size": "lg" },
+              { "id": "public", "label": "Public URL", "type": "app", "x": 82, "y": 60, "size": "sm" }
+            ],
+            "edges": [
+              { "id": "object-public", "from": "object", "to": "public", "style": "dashed", "animated": true }
+            ]
+          }
+        ]
+      }
+    ]
+  },
   "commands": [
     { "cmd": "gcloud storage buckets create", "purpose": "Creates a new bucket" },
     { "cmd": "gcloud storage cp", "purpose": "Copies files to/from buckets" }

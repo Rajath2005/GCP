@@ -59,6 +59,241 @@
       ]
     }
   ],
+  "architecture": {
+    "tasks": [
+      {
+        "overview": {
+          "nodes": [
+            { "id": "user", "label": "User", "type": "user", "x": 10, "y": 55, "size": "sm" },
+            { "id": "console", "label": "Cloud Console", "type": "app", "x": 35, "y": 35 },
+            { "id": "vm", "label": "Compute Engine", "type": "compute", "x": 70, "y": 50, "size": "lg" }
+          ],
+          "edges": [
+            { "id": "user-console", "from": "user", "to": "console", "style": "dashed", "animated": true },
+            { "id": "console-vm", "from": "console", "to": "vm", "animated": true }
+          ]
+        },
+        "detail": [
+          {
+            "stepIndex": 0,
+            "title": "Open Compute",
+            "nodes": [
+              { "id": "user", "label": "User", "type": "user", "x": 10, "y": 55, "size": "sm" },
+              { "id": "console", "label": "Cloud Console", "type": "app", "x": 35, "y": 35 },
+              { "id": "vm", "label": "Compute Engine", "type": "compute", "x": 70, "y": 50, "size": "lg" }
+            ],
+            "edges": [
+              { "id": "user-console", "from": "user", "to": "console", "style": "dashed", "animated": true },
+              { "id": "console-vm", "from": "console", "to": "vm", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 1,
+            "title": "Create Instance",
+            "nodes": [
+              { "id": "console", "label": "Cloud Console", "type": "app", "x": 30, "y": 35 },
+              { "id": "vm", "label": "Compute Engine", "type": "compute", "x": 70, "y": 50, "size": "lg" }
+            ],
+            "edges": [
+              { "id": "console-vm", "from": "console", "to": "vm", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 2,
+            "title": "Set Name",
+            "nodes": [
+              { "id": "console", "label": "Cloud Console", "type": "app", "x": 30, "y": 35 },
+              { "id": "vm", "label": "Compute Engine", "type": "compute", "x": 70, "y": 50, "size": "lg" }
+            ],
+            "edges": [
+              { "id": "console-vm", "from": "console", "to": "vm", "style": "dashed", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 3,
+            "title": "Series",
+            "nodes": [
+              { "id": "console", "label": "Cloud Console", "type": "app", "x": 30, "y": 35 },
+              { "id": "vm", "label": "Compute Engine", "type": "compute", "x": 70, "y": 50, "size": "lg" }
+            ],
+            "edges": [
+              { "id": "console-vm", "from": "console", "to": "vm", "style": "dashed", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 4,
+            "title": "Machine Type",
+            "nodes": [
+              { "id": "console", "label": "Cloud Console", "type": "app", "x": 30, "y": 35 },
+              { "id": "vm", "label": "Compute Engine", "type": "compute", "x": 70, "y": 50, "size": "lg" }
+            ],
+            "edges": [
+              { "id": "console-vm", "from": "console", "to": "vm", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 5,
+            "title": "Boot Disk",
+            "nodes": [
+              { "id": "console", "label": "Cloud Console", "type": "app", "x": 30, "y": 35 },
+              { "id": "vm", "label": "Compute Engine", "type": "compute", "x": 70, "y": 50, "size": "lg" }
+            ],
+            "edges": [
+              { "id": "console-vm", "from": "console", "to": "vm", "style": "dashed", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 6,
+            "title": "Allow HTTP",
+            "nodes": [
+              { "id": "vm", "label": "Compute Engine", "type": "compute", "x": 60, "y": 45, "size": "lg" },
+              { "id": "fw", "label": "Firewall Rule", "type": "network", "x": 78, "y": 70, "size": "sm" }
+            ],
+            "edges": [
+              { "id": "vm-fw", "from": "vm", "to": "fw", "style": "dashed", "animated": true }
+            ]
+          }
+        ]
+      },
+      {
+        "overview": {
+          "nodes": [
+            { "id": "user", "label": "User", "type": "user", "x": 10, "y": 55, "size": "sm" },
+            { "id": "ssh", "label": "SSH", "type": "ops", "x": 32, "y": 40 },
+            { "id": "vm", "label": "VM Instance", "type": "compute", "x": 62, "y": 50, "size": "lg" },
+            { "id": "nginx", "label": "NGINX", "type": "app", "x": 85, "y": 38, "size": "sm" }
+          ],
+          "edges": [
+            { "id": "user-ssh", "from": "user", "to": "ssh", "style": "dashed", "animated": true },
+            { "id": "ssh-vm", "from": "ssh", "to": "vm", "animated": true },
+            { "id": "vm-nginx", "from": "vm", "to": "nginx", "style": "dashed", "animated": true }
+          ]
+        },
+        "detail": [
+          {
+            "stepIndex": 0,
+            "title": "SSH",
+            "nodes": [
+              { "id": "user", "label": "User", "type": "user", "x": 10, "y": 55, "size": "sm" },
+              { "id": "ssh", "label": "SSH", "type": "ops", "x": 32, "y": 40 },
+              { "id": "vm", "label": "VM Instance", "type": "compute", "x": 62, "y": 50, "size": "lg" }
+            ],
+            "edges": [
+              { "id": "user-ssh", "from": "user", "to": "ssh", "style": "dashed", "animated": true },
+              { "id": "ssh-vm", "from": "ssh", "to": "vm", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 1,
+            "title": "Update",
+            "nodes": [
+              { "id": "ssh", "label": "SSH", "type": "ops", "x": 30, "y": 40 },
+              { "id": "vm", "label": "VM Instance", "type": "compute", "x": 70, "y": 50, "size": "lg" }
+            ],
+            "edges": [
+              { "id": "ssh-vm", "from": "ssh", "to": "vm", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 2,
+            "title": "Install NGINX",
+            "nodes": [
+              { "id": "vm", "label": "VM Instance", "type": "compute", "x": 60, "y": 52, "size": "lg" },
+              { "id": "nginx", "label": "NGINX", "type": "app", "x": 85, "y": 38, "size": "sm" }
+            ],
+            "edges": [
+              { "id": "vm-nginx", "from": "vm", "to": "nginx", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 3,
+            "title": "Verify",
+            "nodes": [
+              { "id": "vm", "label": "VM Instance", "type": "compute", "x": 60, "y": 52, "size": "lg" },
+              { "id": "nginx", "label": "NGINX", "type": "app", "x": 85, "y": 38, "size": "sm" }
+            ],
+            "edges": [
+              { "id": "vm-nginx", "from": "vm", "to": "nginx", "style": "dashed", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 4,
+            "title": "Browse",
+            "nodes": [
+              { "id": "user", "label": "User", "type": "user", "x": 12, "y": 55, "size": "sm" },
+              { "id": "nginx", "label": "NGINX", "type": "app", "x": 60, "y": 45, "size": "lg" }
+            ],
+            "edges": [
+              { "id": "user-nginx", "from": "user", "to": "nginx", "animated": true }
+            ]
+          }
+        ]
+      },
+      {
+        "overview": {
+          "nodes": [
+            { "id": "user", "label": "User", "type": "user", "x": 10, "y": 55, "size": "sm" },
+            { "id": "shell", "label": "Cloud Shell", "type": "ops", "x": 30, "y": 40 },
+            { "id": "gcloud", "label": "gcloud CLI", "type": "app", "x": 55, "y": 35 },
+            { "id": "vm", "label": "Compute Engine", "type": "compute", "x": 80, "y": 52, "size": "lg" }
+          ],
+          "edges": [
+            { "id": "user-shell", "from": "user", "to": "shell", "style": "dashed", "animated": true },
+            { "id": "shell-gcloud", "from": "shell", "to": "gcloud", "animated": true },
+            { "id": "gcloud-vm", "from": "gcloud", "to": "vm", "animated": true }
+          ]
+        },
+        "detail": [
+          {
+            "stepIndex": 0,
+            "title": "Open Shell",
+            "nodes": [
+              { "id": "user", "label": "User", "type": "user", "x": 10, "y": 55, "size": "sm" },
+              { "id": "shell", "label": "Cloud Shell", "type": "ops", "x": 35, "y": 40 },
+              { "id": "gcloud", "label": "gcloud CLI", "type": "app", "x": 65, "y": 35 }
+            ],
+            "edges": [
+              { "id": "user-shell", "from": "user", "to": "shell", "style": "dashed", "animated": true },
+              { "id": "shell-gcloud", "from": "shell", "to": "gcloud", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 1,
+            "title": "Set Region",
+            "nodes": [
+              { "id": "shell", "label": "Cloud Shell", "type": "ops", "x": 30, "y": 40 },
+              { "id": "gcloud", "label": "gcloud CLI", "type": "app", "x": 62, "y": 35 }
+            ],
+            "edges": [
+              { "id": "shell-gcloud", "from": "shell", "to": "gcloud", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 2,
+            "title": "Create VM",
+            "nodes": [
+              { "id": "gcloud", "label": "gcloud CLI", "type": "app", "x": 45, "y": 35 },
+              { "id": "vm", "label": "Compute Engine", "type": "compute", "x": 78, "y": 52, "size": "lg" }
+            ],
+            "edges": [
+              { "id": "gcloud-vm", "from": "gcloud", "to": "vm", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 3,
+            "title": "SSH",
+            "nodes": [
+              { "id": "gcloud", "label": "gcloud CLI", "type": "app", "x": 45, "y": 35 },
+              { "id": "vm", "label": "Compute Engine", "type": "compute", "x": 78, "y": 52, "size": "lg" }
+            ],
+            "edges": [
+              { "id": "gcloud-vm", "from": "gcloud", "to": "vm", "style": "dashed", "animated": true }
+            ]
+          }
+        ]
+      }
+    ]
+  },
   "commands": [
     { "cmd": "sudo apt-get update", "purpose": "Updates package repository" },
     { "cmd": "sudo apt-get install -y nginx", "purpose": "Installs NGINX web server" },

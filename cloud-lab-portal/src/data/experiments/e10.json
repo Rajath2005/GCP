@@ -29,6 +29,148 @@
       ]
     }
   ],
+  "architecture": {
+    "tasks": [
+      {
+        "overview": {
+          "nodes": [
+            { "id": "user", "label": "DevOps", "type": "user", "x": 12, "y": 55, "size": "sm" },
+            { "id": "registry", "label": "Artifact Registry", "type": "registry", "x": 50, "y": 35, "size": "lg" },
+            { "id": "gke", "label": "GKE Cluster", "type": "compute", "x": 78, "y": 55, "size": "lg" }
+          ],
+          "edges": [
+            { "id": "user-registry", "from": "user", "to": "registry", "style": "dashed", "animated": true },
+            { "id": "registry-gke", "from": "registry", "to": "gke", "animated": true }
+          ]
+        },
+        "detail": [
+          {
+            "stepIndex": 0,
+            "title": "Enable APIs",
+            "nodes": [
+              { "id": "user", "label": "DevOps", "type": "user", "x": 12, "y": 55, "size": "sm" },
+              { "id": "registry", "label": "Artifact Registry", "type": "registry", "x": 55, "y": 35, "size": "lg" }
+            ],
+            "edges": [
+              { "id": "user-registry", "from": "user", "to": "registry", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 1,
+            "title": "Create Registry",
+            "nodes": [
+              { "id": "registry", "label": "Artifact Registry", "type": "registry", "x": 55, "y": 35, "size": "lg" }
+            ],
+            "edges": []
+          },
+          {
+            "stepIndex": 2,
+            "title": "Create Cluster",
+            "nodes": [
+              { "id": "registry", "label": "Artifact Registry", "type": "registry", "x": 45, "y": 35, "size": "lg" },
+              { "id": "gke", "label": "GKE Cluster", "type": "compute", "x": 78, "y": 55, "size": "lg" }
+            ],
+            "edges": [
+              { "id": "registry-gke", "from": "registry", "to": "gke", "animated": true }
+            ]
+          }
+        ]
+      },
+      {
+        "overview": {
+          "nodes": [
+            { "id": "github", "label": "GitHub", "type": "cicd", "x": 15, "y": 35, "size": "sm" },
+            { "id": "build", "label": "Cloud Build", "type": "cicd", "x": 45, "y": 40, "size": "lg" },
+            { "id": "registry", "label": "Artifact Registry", "type": "registry", "x": 75, "y": 50, "size": "lg" }
+          ],
+          "edges": [
+            { "id": "github-build", "from": "github", "to": "build", "animated": true },
+            { "id": "build-registry", "from": "build", "to": "registry", "animated": true }
+          ]
+        },
+        "detail": [
+          {
+            "stepIndex": 0,
+            "title": "Define Build",
+            "nodes": [
+              { "id": "build", "label": "Cloud Build", "type": "cicd", "x": 50, "y": 40, "size": "lg" }
+            ],
+            "edges": []
+          },
+          {
+            "stepIndex": 1,
+            "title": "Submit Build",
+            "nodes": [
+              { "id": "build", "label": "Cloud Build", "type": "cicd", "x": 45, "y": 40, "size": "lg" },
+              { "id": "registry", "label": "Artifact Registry", "type": "registry", "x": 75, "y": 50, "size": "lg" }
+            ],
+            "edges": [
+              { "id": "build-registry", "from": "build", "to": "registry", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 2,
+            "title": "Trigger",
+            "nodes": [
+              { "id": "github", "label": "GitHub", "type": "cicd", "x": 20, "y": 35, "size": "sm" },
+              { "id": "build", "label": "Cloud Build", "type": "cicd", "x": 50, "y": 40, "size": "lg" }
+            ],
+            "edges": [
+              { "id": "github-build", "from": "github", "to": "build", "animated": true }
+            ]
+          }
+        ]
+      },
+      {
+        "overview": {
+          "nodes": [
+            { "id": "build", "label": "Cloud Build", "type": "cicd", "x": 30, "y": 40, "size": "lg" },
+            { "id": "gke", "label": "GKE Cluster", "type": "compute", "x": 65, "y": 45, "size": "lg" },
+            { "id": "app", "label": "App Service", "type": "app", "x": 85, "y": 65, "size": "sm" }
+          ],
+          "edges": [
+            { "id": "build-gke", "from": "build", "to": "gke", "animated": true },
+            { "id": "gke-app", "from": "gke", "to": "app", "style": "dashed", "animated": true }
+          ]
+        },
+        "detail": [
+          {
+            "stepIndex": 0,
+            "title": "Deployment Spec",
+            "nodes": [
+              { "id": "build", "label": "Cloud Build", "type": "cicd", "x": 35, "y": 40, "size": "lg" },
+              { "id": "gke", "label": "GKE Cluster", "type": "compute", "x": 70, "y": 45, "size": "lg" }
+            ],
+            "edges": [
+              { "id": "build-gke", "from": "build", "to": "gke", "style": "dashed", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 1,
+            "title": "Apply",
+            "nodes": [
+              { "id": "build", "label": "Cloud Build", "type": "cicd", "x": 35, "y": 40, "size": "lg" },
+              { "id": "gke", "label": "GKE Cluster", "type": "compute", "x": 70, "y": 45, "size": "lg" }
+            ],
+            "edges": [
+              { "id": "build-gke", "from": "build", "to": "gke", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 2,
+            "title": "Auto Deploy",
+            "nodes": [
+              { "id": "gke", "label": "GKE Cluster", "type": "compute", "x": 60, "y": 45, "size": "lg" },
+              { "id": "app", "label": "App Service", "type": "app", "x": 85, "y": 65, "size": "sm" }
+            ],
+            "edges": [
+              { "id": "gke-app", "from": "gke", "to": "app", "animated": true }
+            ]
+          }
+        ]
+      }
+    ]
+  },
   "commands": [
     { "cmd": "gcloud builds submit", "purpose": "Manually triggers a Cloud Build" },
     { "cmd": "kubectl apply -f", "purpose": "Deploys resources to a Kubernetes cluster" }

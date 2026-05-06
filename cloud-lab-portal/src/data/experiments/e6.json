@@ -25,6 +25,161 @@
       ]
     }
   ],
+  "architecture": {
+    "tasks": [
+      {
+        "overview": {
+          "nodes": [
+            { "id": "user", "label": "Admin", "type": "user", "x": 12, "y": 55, "size": "sm" },
+            { "id": "console", "label": "Cloud Console", "type": "app", "x": 38, "y": 35 },
+            { "id": "sql", "label": "Cloud SQL", "type": "database", "x": 75, "y": 50, "size": "lg" }
+          ],
+          "edges": [
+            { "id": "user-console", "from": "user", "to": "console", "style": "dashed", "animated": true },
+            { "id": "console-sql", "from": "console", "to": "sql", "animated": true }
+          ]
+        },
+        "detail": [
+          {
+            "stepIndex": 0,
+            "title": "Open SQL",
+            "nodes": [
+              { "id": "user", "label": "Admin", "type": "user", "x": 12, "y": 55, "size": "sm" },
+              { "id": "console", "label": "Cloud Console", "type": "app", "x": 38, "y": 35 },
+              { "id": "sql", "label": "Cloud SQL", "type": "database", "x": 75, "y": 50, "size": "lg" }
+            ],
+            "edges": [
+              { "id": "user-console", "from": "user", "to": "console", "style": "dashed", "animated": true },
+              { "id": "console-sql", "from": "console", "to": "sql", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 1,
+            "title": "Select Engine",
+            "nodes": [
+              { "id": "user", "label": "Admin", "type": "user", "x": 12, "y": 55, "size": "sm" },
+              { "id": "console", "label": "Cloud Console", "type": "app", "x": 38, "y": 35 },
+              { "id": "sql", "label": "Cloud SQL", "type": "database", "x": 75, "y": 50, "size": "lg" }
+            ],
+            "edges": [
+              { "id": "user-console", "from": "user", "to": "console", "style": "dashed", "animated": true },
+              { "id": "console-sql", "from": "console", "to": "sql", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 2,
+            "title": "Configure Instance",
+            "nodes": [
+              { "id": "user", "label": "Admin", "type": "user", "x": 12, "y": 55, "size": "sm" },
+              { "id": "console", "label": "Cloud Console", "type": "app", "x": 38, "y": 35 },
+              { "id": "sql", "label": "Cloud SQL", "type": "database", "x": 75, "y": 50, "size": "lg" }
+            ],
+            "edges": [
+              { "id": "console-sql", "from": "console", "to": "sql", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 3,
+            "title": "Sizing",
+            "nodes": [
+              { "id": "console", "label": "Cloud Console", "type": "app", "x": 30, "y": 35 },
+              { "id": "sql", "label": "Cloud SQL", "type": "database", "x": 70, "y": 50, "size": "lg" }
+            ],
+            "edges": [
+              { "id": "console-sql", "from": "console", "to": "sql", "style": "dashed", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 4,
+            "title": "Provision",
+            "nodes": [
+              { "id": "console", "label": "Cloud Console", "type": "app", "x": 30, "y": 35 },
+              { "id": "sql", "label": "Cloud SQL", "type": "database", "x": 70, "y": 50, "size": "lg" }
+            ],
+            "edges": [
+              { "id": "console-sql", "from": "console", "to": "sql", "animated": true }
+            ]
+          }
+        ]
+      },
+      {
+        "overview": {
+          "nodes": [
+            { "id": "user", "label": "Developer", "type": "user", "x": 10, "y": 55, "size": "sm" },
+            { "id": "shell", "label": "Cloud Shell", "type": "ops", "x": 32, "y": 38 },
+            { "id": "sql", "label": "Cloud SQL", "type": "database", "x": 60, "y": 45, "size": "lg" },
+            { "id": "db", "label": "Guestbook DB", "type": "database", "x": 84, "y": 60, "size": "sm" }
+          ],
+          "edges": [
+            { "id": "user-shell", "from": "user", "to": "shell", "style": "dashed", "animated": true },
+            { "id": "shell-sql", "from": "shell", "to": "sql", "animated": true },
+            { "id": "sql-db", "from": "sql", "to": "db", "style": "dashed", "animated": true }
+          ]
+        },
+        "detail": [
+          {
+            "stepIndex": 0,
+            "title": "Connect",
+            "nodes": [
+              { "id": "user", "label": "Developer", "type": "user", "x": 10, "y": 55, "size": "sm" },
+              { "id": "shell", "label": "Cloud Shell", "type": "ops", "x": 32, "y": 38 },
+              { "id": "sql", "label": "Cloud SQL", "type": "database", "x": 60, "y": 45, "size": "lg" }
+            ],
+            "edges": [
+              { "id": "user-shell", "from": "user", "to": "shell", "style": "dashed", "animated": true },
+              { "id": "shell-sql", "from": "shell", "to": "sql", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 1,
+            "title": "Create DB",
+            "nodes": [
+              { "id": "shell", "label": "Cloud Shell", "type": "ops", "x": 30, "y": 35 },
+              { "id": "sql", "label": "Cloud SQL", "type": "database", "x": 60, "y": 45, "size": "lg" },
+              { "id": "db", "label": "Guestbook DB", "type": "database", "x": 84, "y": 60, "size": "sm" }
+            ],
+            "edges": [
+              { "id": "shell-sql", "from": "shell", "to": "sql", "animated": true },
+              { "id": "sql-db", "from": "sql", "to": "db", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 2,
+            "title": "Create Table",
+            "nodes": [
+              { "id": "shell", "label": "Cloud Shell", "type": "ops", "x": 30, "y": 35 },
+              { "id": "db", "label": "Guestbook DB", "type": "database", "x": 70, "y": 55, "size": "lg" }
+            ],
+            "edges": [
+              { "id": "shell-db", "from": "shell", "to": "db", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 3,
+            "title": "Insert Data",
+            "nodes": [
+              { "id": "shell", "label": "Cloud Shell", "type": "ops", "x": 30, "y": 35 },
+              { "id": "db", "label": "Guestbook DB", "type": "database", "x": 70, "y": 55, "size": "lg" }
+            ],
+            "edges": [
+              { "id": "shell-db", "from": "shell", "to": "db", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 4,
+            "title": "Query",
+            "nodes": [
+              { "id": "shell", "label": "Cloud Shell", "type": "ops", "x": 30, "y": 35 },
+              { "id": "db", "label": "Guestbook DB", "type": "database", "x": 70, "y": 55, "size": "lg" }
+            ],
+            "edges": [
+              { "id": "shell-db", "from": "shell", "to": "db", "style": "dashed", "animated": true }
+            ]
+          }
+        ]
+      }
+    ]
+  },
   "commands": [
     { "cmd": "gcloud sql connect [ID] --user=root", "purpose": "Connect to SQL instance" },
     { "cmd": "CREATE DATABASE [NAME]", "purpose": "SQL command to create a database" }

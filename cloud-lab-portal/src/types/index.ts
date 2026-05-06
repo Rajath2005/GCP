@@ -12,12 +12,66 @@ export type AnimationTrigger =
   | 'DEPLOY_FUNCTION'
   | 'CREATE_CLUSTER';
 
+export type ArchitectureNodeType =
+  | 'compute'
+  | 'storage'
+  | 'database'
+  | 'network'
+  | 'serverless'
+  | 'monitoring'
+  | 'messaging'
+  | 'registry'
+  | 'cicd'
+  | 'app'
+  | 'user'
+  | 'ops'
+  | 'generic';
+
+export type ArchitectureEdgeStyle = 'solid' | 'dashed';
+
 export interface DetailedStep {
   description: string;
   command?: string;
   codeBlock?: string;
   expectedOutput?: string;
   animationTrigger?: AnimationTrigger;
+}
+
+export interface ArchitectureNode {
+  id: string;
+  label: string;
+  type: ArchitectureNodeType;
+  x: number;
+  y: number;
+  size?: 'sm' | 'md' | 'lg';
+}
+
+export interface ArchitectureEdge {
+  id: string;
+  from: string;
+  to: string;
+  label?: string;
+  style?: ArchitectureEdgeStyle;
+  animated?: boolean;
+}
+
+export interface ArchitectureView {
+  nodes: ArchitectureNode[];
+  edges: ArchitectureEdge[];
+}
+
+export interface ArchitectureStepDetail extends ArchitectureView {
+  stepIndex: number;
+  title?: string;
+}
+
+export interface TaskArchitecture {
+  overview: ArchitectureView;
+  detail: ArchitectureStepDetail[];
+}
+
+export interface ExperimentArchitecture {
+  tasks: TaskArchitecture[];
 }
 
 export interface Task {
@@ -43,6 +97,7 @@ export interface Experiment {
   tasks: Task[];
   commands: Command[];
   viva: Viva[];
+  architecture?: ExperimentArchitecture;
   notes?: string[];
   conclusion?: string;
   result?: string;

@@ -1,22 +1,29 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { type Task, type AnimationTrigger } from '../types';
+import { type Task, type AnimationTrigger, type ExperimentArchitecture } from '../types';
 import ArchitectureCanvas from './ArchitectureCanvas';
 
 interface InteractiveStepViewerProps {
   tasks: Task[];
+  architecture?: ExperimentArchitecture;
 }
 
-const InteractiveStepViewer = ({ tasks }: InteractiveStepViewerProps) => {
+const InteractiveStepViewer = ({ tasks, architecture }: InteractiveStepViewerProps) => {
   const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
   const [activeTrigger, setActiveTrigger] = useState<AnimationTrigger | undefined>();
+  const [activeStepIndex, setActiveStepIndex] = useState(0);
+  const [viewMode, setViewMode] = useState<'overview' | 'detail'>('overview');
   const currentTask = tasks[currentTaskIndex];
+  const currentArchitecture = architecture?.tasks[currentTaskIndex];
   const progress = ((currentTaskIndex + 1) / tasks.length) * 100;
 
   // Set active trigger when task changes
   useEffect(() => {
-    const firstTrigger = currentTask.steps.find(s => s.animationTrigger)?.animationTrigger;
-    setActiveTrigger(firstTrigger);
+    const firstTriggerIndex = currentTask.steps.findIndex((step) => step.animationTrigger);
+    const nextIndex = firstTriggerIndex >= 0 ? firstTriggerIndex : 0;
+    setActiveStepIndex(nextIndex);
+    setActiveTrigger(currentTask.steps[nextIndex]?.animationTrigger);
+    setViewMode('overview');
   }, [currentTaskIndex, currentTask]);
 
   const nextTask = () => {
@@ -39,8 +46,62 @@ const InteractiveStepViewer = ({ tasks }: InteractiveStepViewerProps) => {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-      {/* Left Column: Instructions (60%) */}
-      <div className="lg:col-span-7 bg-gray-900 rounded-lg border border-gray-800 overflow-hidden shadow-2xl">
+      {/* Right Column (Visual Simulation) - Shown first on mobile (order-1) and second on desktop (lg:order-2) */}
+      <div className="lg:col-span-5 lg:sticky lg:top-24 order-1 lg:order-2 mb-8 lg:mb-0">
+        <div className="mb-4 flex items-center justify-between">
+          <h3 className="text-xs font-mono font-bold text-gray-500 uppercase tracking-[0.2em]">Live_Architecture_Canvas</h3>
+          <div className="flex items-center space-x-2">
+            <div className="flex space-x-1">
+              <div className="w-1.5 h-1.5 rounded-full bg-red-500/30" />
+              <div className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
+            </div>
+            <div className="flex items-center rounded-full bg-gray-900/60 border border-gray-800 p-0.5 text-[10px] font-mono uppercase">
+              <button
+                type="button"
+                onClick={() => setViewMode('overview')}
+                className={`px-2 py-1 rounded-full transition-all ${
+                  viewMode === 'overview'
+                    ? 'bg-blue-500/20 text-blue-200'
+                    : 'text-gray-500 hover:text-gray-300'
+                }`}
+              >
+                Overview
+              </button>
+              <button
+                type="button"
+                onClick={() => setViewMode('detail')}
+                className={`px-2 py-1 rounded-full transition-all ${
+                  viewMode === 'detail'
+                    ? 'bg-blue-500/20 text-blue-200'
+                    : 'text-gray-500 hover:text-gray-300'
+                }`}
+              >
+                Detail
+              </button>
+            </div>
+          </div>
+        </div>
+        <ArchitectureCanvas
+          activeTrigger={activeTrigger}
+          steps={currentTask.steps}
+          activeStepIndex={activeStepIndex}
+          architecture={currentArchitecture}
+          viewMode={viewMode}
+          onSelectStep={(index) => {
+            setActiveStepIndex(index);
+            setActiveTrigger(currentTask.steps[index]?.animationTrigger);
+            setViewMode('detail');
+          }}
+        />
+        <div className="mt-4 devtool-card p-4 rounded-lg opacity-60">
+          <p className="text-[10px] font-mono text-gray-500 leading-relaxed uppercase tracking-wider">
+            Architecture simulation is reactive. Icons with blue borders indicate an interactive trigger point.
+          </p>
+        </div>
+      </div>
+
+      {/* Left Column (Instructions) - Shown second on mobile (order-2) and first on desktop (lg:order-1) */}
+      <div className="lg:col-span-7 bg-gray-900 rounded-lg border border-gray-800 overflow-hidden shadow-2xl order-2 lg:order-1">
         {/* Header Info */}
         <div className="bg-gray-800/50 border-b border-gray-800 p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
@@ -93,8 +154,19 @@ const InteractiveStepViewer = ({ tasks }: InteractiveStepViewerProps) => {
               transition={{ duration: 0.2 }}
               className="space-y-0 relative"
             >
-              {currentTask.steps.map((step, idx) => (
-                <div key={idx} className="relative flex group">
+              {currentTask.steps.map((step, idx) => {
+                const isActiveStep = idx === activeStepIndex;
+
+                return (
+                <div
+                  key={idx}
+                  className="relative flex group cursor-pointer"
+                  onClick={() => {
+                    setActiveStepIndex(idx);
+                    setActiveTrigger(step.animationTrigger);
+                    setViewMode('detail');
+                  }}
+                >
                   {/* Vertical Line */}
                   {idx !== currentTask.steps.length - 1 && (
                     <div className="absolute left-[15px] top-[40px] bottom-[-20px] w-[2px] bg-gray-800 group-hover:bg-gray-700 transition-colors" />
@@ -104,9 +176,11 @@ const InteractiveStepViewer = ({ tasks }: InteractiveStepViewerProps) => {
                   <div 
                     onClick={() => step.animationTrigger && setActiveTrigger(step.animationTrigger)}
                     className={`flex-shrink-0 w-8 h-8 rounded-full bg-gray-900 border-2 flex items-center justify-center text-[10px] font-mono font-bold z-10 transition-all mt-1 ${
-                      step.animationTrigger 
-                        ? 'border-blue-500 text-blue-400 cursor-pointer shadow-[0_0_10px_rgba(88,166,255,0.2)]' 
-                        : 'border-gray-800 text-gray-500 group-hover:border-gray-700'
+                      isActiveStep
+                        ? 'border-blue-400 text-blue-200 shadow-[0_0_12px_rgba(88,166,255,0.35)] ring-2 ring-blue-500/30'
+                        : step.animationTrigger 
+                          ? 'border-blue-500 text-blue-400 cursor-pointer shadow-[0_0_10px_rgba(88,166,255,0.2)]' 
+                          : 'border-gray-800 text-gray-500 group-hover:border-gray-700'
                     }`}
                   >
                     {step.animationTrigger ? (
@@ -116,7 +190,9 @@ const InteractiveStepViewer = ({ tasks }: InteractiveStepViewerProps) => {
                     ) : (idx + 1)}
                   </div>
 
-                  <div className="flex-grow ml-6 pb-12">
+                  <div className={`flex-grow ml-6 pb-12 rounded-lg transition-colors ${
+                    isActiveStep ? 'bg-blue-500/5' : ''
+                  }`}>
                     <p className="text-gray-300 text-base leading-relaxed mb-4">
                       {step.description}
                     </p>
@@ -159,7 +235,8 @@ const InteractiveStepViewer = ({ tasks }: InteractiveStepViewerProps) => {
                     )}
                   </div>
                 </div>
-              ))}
+              );
+              })}
             </motion.div>
           </AnimatePresence>
 
@@ -193,22 +270,6 @@ const InteractiveStepViewer = ({ tasks }: InteractiveStepViewerProps) => {
         </div>
       </div>
 
-      {/* Right Column: Visual Simulation (40%) */}
-      <div className="lg:col-span-5 sticky top-24 hidden lg:block">
-        <div className="mb-4 flex items-center justify-between">
-          <h3 className="text-xs font-mono font-bold text-gray-500 uppercase tracking-[0.2em]">Live_Architecture_Canvas</h3>
-          <div className="flex space-x-1">
-            <div className="w-1.5 h-1.5 rounded-full bg-red-500/30" />
-            <div className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
-          </div>
-        </div>
-        <ArchitectureCanvas activeTrigger={activeTrigger} />
-        <div className="mt-4 devtool-card p-4 rounded-lg opacity-60">
-          <p className="text-[10px] font-mono text-gray-500 leading-relaxed uppercase tracking-wider">
-            Architecture simulation is reactive. Icons with blue borders indicate an interactive trigger point.
-          </p>
-        </div>
-      </div>
     </div>
   );
 };

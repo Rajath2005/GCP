@@ -23,6 +23,128 @@
       ]
     }
   ],
+  "architecture": {
+    "tasks": [
+      {
+        "overview": {
+          "nodes": [
+            { "id": "user", "label": "Network Admin", "type": "user", "x": 12, "y": 55, "size": "sm" },
+            { "id": "vpc", "label": "VPC Network", "type": "network", "x": 50, "y": 40, "size": "lg" },
+            { "id": "vm-us", "label": "VM US", "type": "compute", "x": 72, "y": 30, "size": "sm" },
+            { "id": "vm-eu", "label": "VM EU", "type": "compute", "x": 72, "y": 60, "size": "sm" },
+            { "id": "fw", "label": "Firewall", "type": "network", "x": 85, "y": 45, "size": "sm" }
+          ],
+          "edges": [
+            { "id": "user-vpc", "from": "user", "to": "vpc", "style": "dashed", "animated": true },
+            { "id": "vpc-vm-us", "from": "vpc", "to": "vm-us", "animated": true },
+            { "id": "vpc-vm-eu", "from": "vpc", "to": "vm-eu", "animated": true },
+            { "id": "vpc-fw", "from": "vpc", "to": "fw", "style": "dashed", "animated": true }
+          ]
+        },
+        "detail": [
+          {
+            "stepIndex": 0,
+            "title": "Open VPC",
+            "nodes": [
+              { "id": "user", "label": "Network Admin", "type": "user", "x": 12, "y": 55, "size": "sm" },
+              { "id": "vpc", "label": "VPC Network", "type": "network", "x": 55, "y": 40, "size": "lg" }
+            ],
+            "edges": [
+              { "id": "user-vpc", "from": "user", "to": "vpc", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 1,
+            "title": "Create VPC",
+            "nodes": [
+              { "id": "vpc", "label": "VPC Network", "type": "network", "x": 55, "y": 40, "size": "lg" }
+            ],
+            "edges": []
+          },
+          {
+            "stepIndex": 2,
+            "title": "Create VMs",
+            "nodes": [
+              { "id": "vpc", "label": "VPC Network", "type": "network", "x": 50, "y": 40, "size": "lg" },
+              { "id": "vm-us", "label": "VM US", "type": "compute", "x": 72, "y": 30, "size": "sm" },
+              { "id": "vm-eu", "label": "VM EU", "type": "compute", "x": 72, "y": 60, "size": "sm" }
+            ],
+            "edges": [
+              { "id": "vpc-vm-us", "from": "vpc", "to": "vm-us", "animated": true },
+              { "id": "vpc-vm-eu", "from": "vpc", "to": "vm-eu", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 3,
+            "title": "Firewall",
+            "nodes": [
+              { "id": "vpc", "label": "VPC Network", "type": "network", "x": 50, "y": 40, "size": "lg" },
+              { "id": "fw", "label": "Firewall", "type": "network", "x": 82, "y": 45, "size": "sm" }
+            ],
+            "edges": [
+              { "id": "vpc-fw", "from": "vpc", "to": "fw", "animated": true }
+            ]
+          }
+        ]
+      },
+      {
+        "overview": {
+          "nodes": [
+            { "id": "vpc-a", "label": "mynetwork", "type": "network", "x": 30, "y": 45, "size": "lg" },
+            { "id": "peer", "label": "Peering", "type": "network", "x": 55, "y": 45, "size": "sm" },
+            { "id": "vpc-b", "label": "privatenet", "type": "network", "x": 80, "y": 45, "size": "lg" }
+          ],
+          "edges": [
+            { "id": "a-peer", "from": "vpc-a", "to": "peer", "animated": true },
+            { "id": "peer-b", "from": "peer", "to": "vpc-b", "animated": true }
+          ]
+        },
+        "detail": [
+          {
+            "stepIndex": 0,
+            "title": "Create VPC",
+            "nodes": [
+              { "id": "vpc-a", "label": "mynetwork", "type": "network", "x": 40, "y": 45, "size": "lg" }
+            ],
+            "edges": []
+          },
+          {
+            "stepIndex": 1,
+            "title": "Peer A->B",
+            "nodes": [
+              { "id": "vpc-a", "label": "mynetwork", "type": "network", "x": 30, "y": 45, "size": "lg" },
+              { "id": "peer", "label": "Peering", "type": "network", "x": 55, "y": 45, "size": "sm" }
+            ],
+            "edges": [
+              { "id": "a-peer", "from": "vpc-a", "to": "peer", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 2,
+            "title": "Peer B->A",
+            "nodes": [
+              { "id": "peer", "label": "Peering", "type": "network", "x": 55, "y": 45, "size": "sm" },
+              { "id": "vpc-b", "label": "privatenet", "type": "network", "x": 80, "y": 45, "size": "lg" }
+            ],
+            "edges": [
+              { "id": "peer-b", "from": "peer", "to": "vpc-b", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 3,
+            "title": "Ping",
+            "nodes": [
+              { "id": "vpc-a", "label": "mynetwork", "type": "network", "x": 30, "y": 45, "size": "lg" },
+              { "id": "vpc-b", "label": "privatenet", "type": "network", "x": 80, "y": 45, "size": "lg" }
+            ],
+            "edges": [
+              { "id": "a-b", "from": "vpc-a", "to": "vpc-b", "style": "dashed", "animated": true }
+            ]
+          }
+        ]
+      }
+    ]
+  },
   "commands": [
     { "cmd": "ping [INTERNAL_IP]", "purpose": "Tests internal network connectivity" },
     { "cmd": "gcloud compute networks peerings create", "purpose": "Creates VPC peering connection" }

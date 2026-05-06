@@ -97,25 +97,25 @@ const ExperimentDetail = () => {
               exit={{ opacity: 0, scale: 0.98 }}
               className="space-y-8"
             >
-              <div className="ruled-paper text-gray-900 p-8 pt-12 pb-20 rounded shadow-2xl min-h-[800px]">
-                <div className="pl-20">
+            <div className="ruled-paper text-gray-900 p-4 md:p-8 pt-8 md:pt-12 pb-20 rounded shadow-2xl min-h-[800px]">
+                <div className="pl-6 md:pl-20">
                   <div className="border-b-2 border-red-500/20 pb-4 mb-12 text-center">
-                    <h2 className="text-3xl font-bold uppercase tracking-[0.2em] text-blue-900 font-serif">Lab Record</h2>
+                    <h2 className="text-2xl md:text-3xl font-bold uppercase tracking-[0.2em] text-blue-900 font-serif">Lab Record</h2>
                   </div>
                   
-                  <div className="space-y-10 font-serif text-lg leading-[1.5em]">
+                  <div className="space-y-10 font-serif text-base md:text-lg leading-[1.5em]">
                     <section>
                       <h3 className="font-bold text-xl text-red-600 mb-2">AIM:</h3>
-                      <p className="ml-4 italic">{experiment.aim}</p>
+                      <p className="ml-2 md:ml-4 italic">{experiment.aim}</p>
                     </section>
 
                     <section>
                       <h3 className="font-bold text-xl text-red-600 mb-2">PROCEDURE:</h3>
-                      <ol className="list-decimal list-outside ml-10 space-y-4">
+                      <ol className="list-decimal list-outside ml-6 md:ml-10 space-y-4">
                         {experiment.tasks.map((task, i) => (
                           <li key={i}>
                             <span className="font-bold underline">{task.title}</span>
-                            <ul className="list-disc list-outside ml-6 mt-1 space-y-1 font-normal text-base opacity-80">
+                            <ul className="list-disc list-outside ml-4 md:ml-6 mt-1 space-y-1 font-normal text-sm md:text-base opacity-80">
                               {task.steps.map((step, si) => (
                                 <li key={si}>{step.description}</li>
                               ))}
@@ -127,12 +127,12 @@ const ExperimentDetail = () => {
 
                     <section>
                       <h3 className="font-bold text-xl text-red-600 mb-2">RESULT:</h3>
-                      <p className="ml-4 italic">{experiment.result || 'The experiment was successfully performed and the output was verified on the Google Cloud Console.'}</p>
+                      <p className="ml-2 md:ml-4 italic">{experiment.result || 'The experiment was successfully performed and the output was verified on the Google Cloud Console.'}</p>
                     </section>
 
                     <section>
                       <h3 className="font-bold text-xl text-red-600 mb-2">CONCLUSION:</h3>
-                      <p className="ml-4 italic">{experiment.conclusion || `Successfully understood the deployment and management of ${experiment.title.toLowerCase()} in GCP.`}</p>
+                      <p className="ml-2 md:ml-4 italic">{experiment.conclusion || `Successfully understood the deployment and management of ${experiment.title.toLowerCase()} in GCP.`}</p>
                     </section>
                   </div>
                 </div>
@@ -169,7 +169,7 @@ const ExperimentDetail = () => {
                     Terminal_v2.4
                   </div>
                 </div>
-                <InteractiveStepViewer tasks={experiment.tasks} />
+                <InteractiveStepViewer tasks={experiment.tasks} architecture={experiment.architecture} />
               </section>
 
               <section className="mb-16">

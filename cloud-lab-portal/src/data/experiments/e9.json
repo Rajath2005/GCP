@@ -30,6 +30,162 @@
       ]
     }
   ],
+  "architecture": {
+    "tasks": [
+      {
+        "overview": {
+          "nodes": [
+            { "id": "user", "label": "Operator", "type": "user", "x": 12, "y": 55, "size": "sm" },
+            { "id": "vm", "label": "VM Instance", "type": "compute", "x": 50, "y": 45, "size": "lg" },
+            { "id": "ops", "label": "Ops Agent", "type": "monitoring", "x": 78, "y": 55, "size": "sm" }
+          ],
+          "edges": [
+            { "id": "user-vm", "from": "user", "to": "vm", "style": "dashed", "animated": true },
+            { "id": "vm-ops", "from": "vm", "to": "ops", "animated": true }
+          ]
+        },
+        "detail": [
+          {
+            "stepIndex": 0,
+            "title": "Create VM",
+            "nodes": [
+              { "id": "user", "label": "Operator", "type": "user", "x": 12, "y": 55, "size": "sm" },
+              { "id": "vm", "label": "VM Instance", "type": "compute", "x": 60, "y": 45, "size": "lg" }
+            ],
+            "edges": [
+              { "id": "user-vm", "from": "user", "to": "vm", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 1,
+            "title": "Install Apache",
+            "nodes": [
+              { "id": "vm", "label": "VM Instance", "type": "compute", "x": 60, "y": 45, "size": "lg" },
+              { "id": "app", "label": "Apache", "type": "app", "x": 82, "y": 65, "size": "sm" }
+            ],
+            "edges": [
+              { "id": "vm-app", "from": "vm", "to": "app", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 2,
+            "title": "Install Ops Agent",
+            "nodes": [
+              { "id": "vm", "label": "VM Instance", "type": "compute", "x": 55, "y": 45, "size": "lg" },
+              { "id": "ops", "label": "Ops Agent", "type": "monitoring", "x": 78, "y": 55, "size": "sm" }
+            ],
+            "edges": [
+              { "id": "vm-ops", "from": "vm", "to": "ops", "animated": true }
+            ]
+          }
+        ]
+      },
+      {
+        "overview": {
+          "nodes": [
+            { "id": "monitoring", "label": "Monitoring", "type": "monitoring", "x": 40, "y": 40, "size": "lg" },
+            { "id": "vm", "label": "VM Instance", "type": "compute", "x": 70, "y": 35, "size": "sm" },
+            { "id": "alert", "label": "Alerting", "type": "monitoring", "x": 75, "y": 65, "size": "sm" }
+          ],
+          "edges": [
+            { "id": "monitor-vm", "from": "monitoring", "to": "vm", "animated": true },
+            { "id": "monitor-alert", "from": "monitoring", "to": "alert", "animated": true }
+          ]
+        },
+        "detail": [
+          {
+            "stepIndex": 0,
+            "title": "Uptime Check",
+            "nodes": [
+              { "id": "monitoring", "label": "Monitoring", "type": "monitoring", "x": 40, "y": 40, "size": "lg" },
+              { "id": "vm", "label": "VM Instance", "type": "compute", "x": 75, "y": 35, "size": "sm" }
+            ],
+            "edges": [
+              { "id": "monitor-vm", "from": "monitoring", "to": "vm", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 1,
+            "title": "Configure Target",
+            "nodes": [
+              { "id": "monitoring", "label": "Monitoring", "type": "monitoring", "x": 40, "y": 40, "size": "lg" },
+              { "id": "vm", "label": "VM Instance", "type": "compute", "x": 75, "y": 35, "size": "sm" }
+            ],
+            "edges": [
+              { "id": "monitor-vm", "from": "monitoring", "to": "vm", "style": "dashed", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 2,
+            "title": "Create Policy",
+            "nodes": [
+              { "id": "monitoring", "label": "Monitoring", "type": "monitoring", "x": 40, "y": 40, "size": "lg" },
+              { "id": "alert", "label": "Alerting", "type": "monitoring", "x": 75, "y": 65, "size": "sm" }
+            ],
+            "edges": [
+              { "id": "monitor-alert", "from": "monitoring", "to": "alert", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 3,
+            "title": "Notify",
+            "nodes": [
+              { "id": "alert", "label": "Alerting", "type": "monitoring", "x": 60, "y": 55, "size": "lg" }
+            ],
+            "edges": []
+          }
+        ]
+      },
+      {
+        "overview": {
+          "nodes": [
+            { "id": "monitoring", "label": "Monitoring", "type": "monitoring", "x": 35, "y": 40, "size": "lg" },
+            { "id": "dashboard", "label": "Dashboard", "type": "app", "x": 70, "y": 45, "size": "lg" },
+            { "id": "vm", "label": "VM Metrics", "type": "compute", "x": 85, "y": 65, "size": "sm" }
+          ],
+          "edges": [
+            { "id": "monitor-dash", "from": "monitoring", "to": "dashboard", "animated": true },
+            { "id": "dash-vm", "from": "dashboard", "to": "vm", "style": "dashed", "animated": true }
+          ]
+        },
+        "detail": [
+          {
+            "stepIndex": 0,
+            "title": "Create Dashboard",
+            "nodes": [
+              { "id": "monitoring", "label": "Monitoring", "type": "monitoring", "x": 35, "y": 40, "size": "lg" },
+              { "id": "dashboard", "label": "Dashboard", "type": "app", "x": 70, "y": 45, "size": "lg" }
+            ],
+            "edges": [
+              { "id": "monitor-dash", "from": "monitoring", "to": "dashboard", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 1,
+            "title": "Add Charts",
+            "nodes": [
+              { "id": "dashboard", "label": "Dashboard", "type": "app", "x": 60, "y": 45, "size": "lg" },
+              { "id": "vm", "label": "VM Metrics", "type": "compute", "x": 85, "y": 65, "size": "sm" }
+            ],
+            "edges": [
+              { "id": "dash-vm", "from": "dashboard", "to": "vm", "animated": true }
+            ]
+          },
+          {
+            "stepIndex": 2,
+            "title": "Configure",
+            "nodes": [
+              { "id": "dashboard", "label": "Dashboard", "type": "app", "x": 60, "y": 45, "size": "lg" },
+              { "id": "vm", "label": "VM Metrics", "type": "compute", "x": 85, "y": 65, "size": "sm" }
+            ],
+            "edges": [
+              { "id": "dash-vm", "from": "dashboard", "to": "vm", "style": "dashed", "animated": true }
+            ]
+          }
+        ]
+      }
+    ]
+  },
   "commands": [
     { "cmd": "sudo apt-get install apache2", "purpose": "Installs a web server to monitor" },
     { "cmd": "sudo bash add-google-cloud-ops-agent-repo.sh", "purpose": "Installs the Monitoring & Logging agent" }
