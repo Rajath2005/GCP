@@ -41,6 +41,7 @@
             { "id": "vpc-fw", "from": "vpc", "to": "fw", "style": "dashed", "animated": true }
           ]
         },
+        "layout": { "xScale": 1.25, "yScale": 1.25, "yOffset": -1 },
         "detail": [
           {
             "stepIndex": 0,
@@ -99,6 +100,7 @@
             { "id": "peer-b", "from": "peer", "to": "vpc-b", "animated": true }
           ]
         },
+        "layout": { "xScale": 1.4, "yScale": 1.05, "xOffset": 2 },
         "detail": [
           {
             "stepIndex": 0,

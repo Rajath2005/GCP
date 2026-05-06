@@ -60,6 +60,13 @@ export interface ArchitectureView {
   edges: ArchitectureEdge[];
 }
 
+export interface ArchitectureLayout {
+  xScale?: number;
+  yScale?: number;
+  xOffset?: number;
+  yOffset?: number;
+}
+
 export interface ArchitectureStepDetail extends ArchitectureView {
   stepIndex: number;
   title?: string;
@@ -68,6 +75,7 @@ export interface ArchitectureStepDetail extends ArchitectureView {
 export interface TaskArchitecture {
   overview: ArchitectureView;
   detail: ArchitectureStepDetail[];
+  layout?: ArchitectureLayout;
 }
 
 export interface ExperimentArchitecture {

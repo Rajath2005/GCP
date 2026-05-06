@@ -38,6 +38,7 @@
             { "id": "bucket-object", "from": "bucket", "to": "object", "style": "dashed", "animated": true }
           ]
         },
+        "layout": { "xScale": 1.35, "yScale": 1.2 },
         "detail": [
           {
             "stepIndex": 0,
@@ -97,6 +98,7 @@
             { "id": "user-public", "from": "user", "to": "public", "style": "dashed", "animated": true }
           ]
         },
+        "layout": { "xScale": 1.25, "yScale": 1.15, "xOffset": 1 },
         "detail": [
           {
             "stepIndex": 0,

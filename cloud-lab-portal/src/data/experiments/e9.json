@@ -44,6 +44,7 @@
             { "id": "vm-ops", "from": "vm", "to": "ops", "animated": true }
           ]
         },
+        "layout": { "xScale": 1.25, "yScale": 1.15 },
         "detail": [
           {
             "stepIndex": 0,
@@ -92,6 +93,7 @@
             { "id": "monitor-alert", "from": "monitoring", "to": "alert", "animated": true }
           ]
         },
+        "layout": { "xScale": 1.3, "yScale": 1.2 },
         "detail": [
           {
             "stepIndex": 0,
@@ -148,6 +150,7 @@
             { "id": "dash-vm", "from": "dashboard", "to": "vm", "style": "dashed", "animated": true }
           ]
         },
+        "layout": { "xScale": 1.3, "yScale": 1.2, "xOffset": 1 },
         "detail": [
           {
             "stepIndex": 0,

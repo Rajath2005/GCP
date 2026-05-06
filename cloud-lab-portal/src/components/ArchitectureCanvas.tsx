@@ -5,6 +5,7 @@ import {
   type TaskArchitecture,
   type ArchitectureNode,
   type ArchitectureView,
+  type ArchitectureLayout,
 } from '../types';
 
 interface ArchitectureCanvasProps {
@@ -24,6 +25,28 @@ const trimLabel = (value: string) => {
   }
 
   return `${value.slice(0, MAX_STEP_LABEL - 3)}...`;
+};
+
+const clampValue = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
+
+const applyLayout = (node: ArchitectureNode, layout?: ArchitectureLayout) => {
+  if (!layout) {
+    return node;
+  }
+
+  const xScale = layout.xScale ?? 1;
+  const yScale = layout.yScale ?? 1;
+  const xOffset = layout.xOffset ?? 0;
+  const yOffset = layout.yOffset ?? 0;
+
+  const x = clampValue(50 + (node.x - 50) * xScale + xOffset, 6, 94);
+  const y = clampValue(50 + (node.y - 50) * yScale + yOffset, 8, 92);
+
+  return {
+    ...node,
+    x,
+    y,
+  };
 };
 
 const getNodeClassNames = (node: ArchitectureNode) => {
@@ -53,8 +76,9 @@ const getNodeClassNames = (node: ArchitectureNode) => {
   return `${base} ${sizeClass} ${palette[node.type]}`;
 };
 
-const renderArchitectureView = (view: ArchitectureView) => {
-  const nodeMap = new Map(view.nodes.map((node) => [node.id, node]));
+const renderArchitectureView = (view: ArchitectureView, layout?: ArchitectureLayout) => {
+  const adjustedNodes = view.nodes.map((node) => applyLayout(node, layout));
+  const nodeMap = new Map(adjustedNodes.map((node) => [node.id, node]));
 
   return (
     <div className="relative w-full h-full min-h-[300px]">
@@ -91,7 +115,7 @@ const renderArchitectureView = (view: ArchitectureView) => {
         })}
       </svg>
 
-      {view.nodes.map((node) => (
+      {adjustedNodes.map((node) => (
         <motion.div
           key={node.id}
           className="absolute"
@@ -137,7 +161,7 @@ const ArchitectureCanvas = ({
               <span>{viewMode === 'overview' ? 'Topology_Overview' : 'Step_Architecture'}</span>
               <span className="text-blue-400">v2</span>
             </div>
-            {renderArchitectureView(resolvedView)}
+            {renderArchitectureView(resolvedView, architecture?.layout)}
           </div>
         ) : (
           <AnimatePresence mode="wait">

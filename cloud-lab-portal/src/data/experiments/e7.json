@@ -40,6 +40,7 @@
             { "id": "topic-sub", "from": "topic", "to": "sub", "animated": true }
           ]
         },
+        "layout": { "xScale": 1.3, "yScale": 1.2 },
         "detail": [
           {
             "stepIndex": 0,
@@ -112,6 +113,7 @@
             { "id": "sub-shell", "from": "sub", "to": "shell", "style": "dashed", "animated": true }
           ]
         },
+        "layout": { "xScale": 1.35, "yScale": 1.2, "xOffset": 1 },
         "detail": [
           {
             "stepIndex": 0,
