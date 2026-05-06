@@ -1,0 +1,57 @@
+{
+  "id": "e6",
+  "title": "Cloud SQL for MySQL: Qwik Start",
+  "aim": "To create a Cloud SQL MySQL instance, connect to it via Cloud Shell, and perform basic SQL operations.",
+  "steps": [
+    {
+      "title": "Create a Cloud SQL Instance",
+      "description": "Go to SQL > Create Instance. Choose MySQL. Select Enterprise edition. Instance ID: myinstance. Generate and note down the root password. Click Create.",
+      "type": "step"
+    },
+    {
+      "title": "Connect Using mysql Client",
+      "description": "Wait for instance to be ready. In Cloud Shell, run 'gcloud sql connect' command and enter the password.",
+      "type": "step"
+    },
+    {
+      "title": "Create Database and Table",
+      "description": "Inside the MySQL prompt, run SQL commands to create a database 'guestbook', a table 'entries', and insert data.",
+      "type": "step"
+    }
+  ],
+  "commands": [
+    {
+      "cmd": "gcloud sql connect myinstance --user=root --quiet",
+      "purpose": "Connect to the Cloud SQL instance from Cloud Shell"
+    },
+    {
+      "cmd": "CREATE DATABASE guestbook;",
+      "purpose": "Create a new SQL database"
+    },
+    {
+      "cmd": "CREATE TABLE entries (guestName VARCHAR(255), content VARCHAR(255), entryID INT NOT NULL AUTO_INCREMENT, PRIMARY KEY(entryID));",
+      "purpose": "Create a new table with an auto-incrementing primary key"
+    },
+    {
+      "cmd": "SELECT * FROM entries;",
+      "purpose": "Retrieve all data from the table"
+    }
+  ],
+  "viva": [
+    {
+      "question": "What is Cloud SQL?",
+      "answer": "It is a fully managed relational database service for MySQL, PostgreSQL, and SQL Server."
+    },
+    {
+      "question": "Why use a managed database like Cloud SQL?",
+      "answer": "It automates tasks like backups, replication, and patching, allowing developers to focus on applications instead of database administration."
+    },
+    {
+      "question": "What is an instance ID?",
+      "answer": "A unique identifier for your database instance within a project."
+    }
+  ],
+  "notes": [
+    "Cloud SQL handles backups, replication, and patching automatically."
+  ]
+}

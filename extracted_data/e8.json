@@ -1,0 +1,68 @@
+{
+  "id": "e8",
+  "title": "VPC Networking Fundamentals + VPC Peering",
+  "aim": "To create a VPC network with firewall rules, deploy VMs in different zones, test connectivity, and set up VPC Network Peering between two VPC networks.",
+  "steps": [
+    {
+      "title": "Part A: VPC Networking Fundamentals",
+      "description": "Create a VPC network and test connectivity between VMs.",
+      "type": "heading"
+    },
+    {
+      "title": "Create a VPC Network",
+      "description": "Go to VPC network > Create VPC Network. Name: mynetwork. Subnet mode: Automatic. Check all 4 default firewall rules. Click Create.",
+      "type": "step"
+    },
+    {
+      "title": "Create VM Instances",
+      "description": "Create two VMs (mynet-us-vm and mynet-eu-vm) in different regions using the 'mynetwork' VPC.",
+      "type": "step"
+    },
+    {
+      "title": "Test Connectivity",
+      "description": "SSH into one VM and ping both the internal and external IPs of the other VM.",
+      "type": "step"
+    },
+    {
+      "title": "Part B: VPC Network Peering",
+      "description": "Connect two separate VPC networks privately.",
+      "type": "heading"
+    },
+    {
+      "title": "Set Up Peering",
+      "description": "Create two VPCs (network-a and network-b). Create a peering connection from A to B, and another from B to A. Verify the status is 'Active'.",
+      "type": "step"
+    }
+  ],
+  "commands": [
+    {
+      "cmd": "gcloud compute instances create mynet-us-vm --zone=us-central1-f --network=mynetwork",
+      "purpose": "Create a VM in a specific VPC network"
+    },
+    {
+      "cmd": "ping -c 3 <INTERNAL_IP>",
+      "purpose": "Test private connectivity between VMs"
+    },
+    {
+      "cmd": "gcloud compute networks peerings create peer-ab --network=network-a --peer-network=network-b --auto-create-routes",
+      "purpose": "Create a VPC peering connection"
+    }
+  ],
+  "viva": [
+    {
+      "question": "What is a VPC?",
+      "answer": "A Virtual Private Cloud (VPC) is a private network environment on Google Cloud that provides networking for your cloud resources."
+    },
+    {
+      "question": "What is VPC Network Peering?",
+      "answer": "It allows two VPC networks to connect internally over the Google Cloud network, making them behave as if they were part of the same network."
+    },
+    {
+      "question": "Is VPC Peering transitive?",
+      "answer": "No, peering is non-transitive. If A is peered with B and B is peered with C, A and C are NOT peered unless you create a direct connection between them."
+    }
+  ],
+  "notes": [
+    "VPC Peering works even across different Google Cloud projects or organizations."
+  ]
+}

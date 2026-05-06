@@ -1,0 +1,38 @@
+{
+  "id": "e6",
+  "title": "Cloud SQL for MySQL",
+  "aim": "To create and interact with a managed MySQL instance on Google Cloud.",
+  "sourceUrl": "https://www.skills.google/focuses/936?parent=catalog",
+  "tasks": [
+    {
+      "title": "Create a MySQL Instance",
+      "steps": [
+        { "description": "Navigate to SQL in the Cloud Console and click 'Create Instance'." },
+        { "description": "Choose 'MySQL' as the database engine." },
+        { "description": "Set Instance ID to 'myinstance' and provide a root password." },
+        { "description": "Select 'Enterprise' edition and a 'Development' preset for lower cost." },
+        { "description": "Click 'Create Instance' and wait for it to be ready." }
+      ]
+    },
+    {
+      "title": "Connect and Run SQL Queries",
+      "steps": [
+        { "description": "Open Cloud Shell and connect to your instance.", "command": "gcloud sql connect myinstance --user=root" },
+        { "description": "Create a new database.", "command": "CREATE DATABASE guestbook;" },
+        { "description": "Create a table with basic fields.", "command": "USE guestbook;\nCREATE TABLE entries (guestName VARCHAR(255), content VARCHAR(255), entryID INT NOT NULL AUTO_INCREMENT, PRIMARY KEY(entryID));" },
+        { "description": "Insert sample data into the table.", "command": "INSERT INTO entries (guestName, content) values (\"first guest\", \"I got here!\");" },
+        { "description": "Query the table to see your data.", "command": "SELECT * FROM entries;" }
+      ]
+    }
+  ],
+  "commands": [
+    { "cmd": "gcloud sql connect [ID] --user=root", "purpose": "Connect to SQL instance" },
+    { "cmd": "CREATE DATABASE [NAME]", "purpose": "SQL command to create a database" }
+  ],
+  "viva": [
+    { "question": "What is Cloud SQL?", "answer": "A fully-managed database service that makes it easy to set up, maintain, manage, and administer relational databases." },
+    { "question": "Relational databases supported?", "answer": "MySQL, PostgreSQL, and SQL Server." }
+  ],
+  "result": "Successfully created a managed MySQL instance and performed basic CRUD operations.",
+  "conclusion": "Understood how to use managed relational database services instead of self-hosting."
+}

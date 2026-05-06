@@ -1,0 +1,59 @@
+{
+  "id": "e9",
+  "title": "Cloud Monitoring: Qwik Start",
+  "aim": "To monitor a Compute Engine VM instance using Cloud Monitoring — install agents, create uptime checks, alerting policies, and dashboards.",
+  "steps": [
+    {
+      "title": "Create a VM and Install Apache",
+      "description": "Create a lamp-1-vm with HTTP traffic allowed. SSH into it and install apache2 and php.",
+      "type": "step"
+    },
+    {
+      "title": "Install the Ops Agent",
+      "description": "Run the Ops Agent installation script to start collecting metrics and logs from the VM.",
+      "type": "step"
+    },
+    {
+      "title": "Create an Uptime Check",
+      "description": "Go to Monitoring > Uptime checks. Create a check for the VM on port 80 (HTTP).",
+      "type": "step"
+    },
+    {
+      "title": "Create an Alerting Policy",
+      "description": "Create a policy based on CPU utilization. Set a threshold (e.g., > 0.5) and add an email notification channel.",
+      "type": "step"
+    },
+    {
+      "title": "Create Dashboard and View Logs",
+      "description": "Create a custom dashboard with a line chart for CPU usage. Use Logs Explorer to view VM logs.",
+      "type": "step"
+    }
+  ],
+  "commands": [
+    {
+      "cmd": "sudo apt-get install -y apache2 php",
+      "purpose": "Install a web server for monitoring"
+    },
+    {
+      "cmd": "sudo bash add-google-cloud-ops-agent-repo.sh --also-install",
+      "purpose": "Install the Google Cloud Ops Agent"
+    }
+  ],
+  "viva": [
+    {
+      "question": "What is Cloud Monitoring?",
+      "answer": "A service that provides dashboards, alerts, and uptime checks to monitor the performance and health of your cloud applications."
+    },
+    {
+      "question": "What is the purpose of the Ops Agent?",
+      "answer": "It is installed on VM instances to collect system metrics (like CPU/Memory) and logs, and send them to Cloud Monitoring and Cloud Logging."
+    },
+    {
+      "question": "What is an Uptime Check?",
+      "answer": "A test that runs periodically to see if a web server or service is responding correctly from different locations."
+    }
+  ],
+  "notes": [
+    "The Ops Agent is the successor to the older Stackdriver agents."
+  ]
+}

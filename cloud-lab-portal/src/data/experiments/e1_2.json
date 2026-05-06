@@ -1,0 +1,69 @@
+{
+  "id": "e1_2",
+  "title": "Create a Virtual Machine (Console + gcloud)",
+  "aim": "To create virtual machines using Google Cloud Console (GUI) and gcloud CLI, and deploy an NGINX web server.",
+  "sourceUrl": "https://www.skills.google/focuses/3563?parent=catalog",
+  "tasks": [
+    {
+      "title": "Create a VM from the Cloud Console",
+      "steps": [
+        { "description": "Navigate to Compute Engine > VM Instances in the Google Cloud Console." },
+        { "description": "Click 'Create Instance' at the top of the page." },
+        { "description": "Set Name to 'gcelab'." },
+        { "description": "Set Series to 'E2'." },
+        { "description": "Set Machine Type to 'e2-medium'." },
+        { "description": "Set Boot Disk to 'Debian GNU/Linux 12 (bookworm)'." },
+        { "description": "In the Firewall section, check 'Allow HTTP traffic'." },
+        { "description": "Click 'Create' and wait for the instance to be provisioned." }
+      ]
+    },
+    {
+      "title": "Install NGINX Web Server",
+      "steps": [
+        { "description": "In the VM Instances list, click 'SSH' next to the 'gcelab' instance." },
+        { 
+          "description": "Update the package repository.",
+          "command": "sudo apt-get update"
+        },
+        { 
+          "description": "Install the NGINX web server.",
+          "command": "sudo apt-get install -y nginx"
+        },
+        { 
+          "description": "Verify that NGINX is running.",
+          "command": "ps auwx | grep nginx"
+        },
+        { "description": "Copy the External IP of 'gcelab' and paste it into a browser to see the 'Welcome to nginx!' page." }
+      ]
+    },
+    {
+      "title": "Create a VM with gcloud",
+      "steps": [
+        { "description": "Open Cloud Shell by clicking the '>_' icon in the top right header." },
+        { 
+          "description": "Set the default region and zone variables (replace with your assigned zone).",
+          "command": "gcloud config set compute/region [REGION]\nexport REGION=[REGION]\nexport ZONE=[ZONE]"
+        },
+        { 
+          "description": "Create a new instance named 'gcelab2' using the gcloud CLI.",
+          "command": "gcloud compute instances create gcelab2 --machine-type e2-medium --zone=$ZONE"
+        },
+        { 
+          "description": "Connect to your new instance via SSH from Cloud Shell.",
+          "command": "gcloud compute ssh gcelab2 --zone=$ZONE"
+        }
+      ]
+    }
+  ],
+  "commands": [
+    { "cmd": "sudo apt-get update", "purpose": "Updates package repository" },
+    { "cmd": "sudo apt-get install -y nginx", "purpose": "Installs NGINX web server" },
+    { "cmd": "gcloud compute instances create gcelab2 --machine-type e2-medium --zone=$ZONE", "purpose": "Create VM via CLI" }
+  ],
+  "viva": [
+    { "question": "What is a VM?", "answer": "A Virtual Machine (VM) is a compute resource that uses software instead of a physical computer to run programs and deploy apps." },
+    { "question": "What is gcloud?", "answer": "gcloud is the primary CLI tool for managing Google Cloud resources." }
+  ],
+  "result": "Successfully created VM instances using both the Console and gcloud CLI, and verified NGINX web server deployment.",
+  "conclusion": "Learned how to provision compute resources on GCP using GUI and CLI methods."
+}

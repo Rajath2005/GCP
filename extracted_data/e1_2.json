@@ -1,0 +1,100 @@
+{
+  "id": "e1_2",
+  "title": "Create a Virtual Machine (Console + gcloud)",
+  "aim": "To create virtual machines using Google Cloud Console (GUI) and gcloud CLI, and deploy an NGINX web server.",
+  "steps": [
+    {
+      "title": "Part A: Create VM via Cloud Console (GUI)",
+      "description": "Create a VM instance using the graphical interface.",
+      "type": "heading"
+    },
+    {
+      "title": "Open Compute Engine",
+      "description": "Go to Navigation Menu > Compute Engine > VM Instances. Click Create Instance.",
+      "type": "step"
+    },
+    {
+      "title": "Configure the VM",
+      "description": "Name: gcelab. Region & Zone: assigned in lab. Series: E2. Machine Type: e2-medium (2 vCPU, 4 GB RAM). Boot Disk: Debian GNU/Linux. Firewall: Check Allow HTTP traffic. Click Create.",
+      "type": "step"
+    },
+    {
+      "title": "Part B: Install NGINX Web Server",
+      "description": "Install and verify NGINX on the VM.",
+      "type": "heading"
+    },
+    {
+      "title": "SSH into the VM",
+      "description": "In the VM Instances list, click SSH next to gcelab.",
+      "type": "step"
+    },
+    {
+      "title": "Install NGINX",
+      "description": "Run the update and install commands in the SSH terminal.",
+      "type": "step"
+    },
+    {
+      "title": "Part C: Create VM via gcloud CLI",
+      "description": "Use Cloud Shell to create and manage VMs.",
+      "type": "heading"
+    },
+    {
+      "title": "Activate Cloud Shell",
+      "description": "Click the Cloud Shell icon (>_) at top right of the console.",
+      "type": "step"
+    },
+    {
+      "title": "Set region and zone",
+      "description": "Run: gcloud config set compute/region REGION, export REGION=REGION, export ZONE=ZONE",
+      "type": "step"
+    },
+    {
+      "title": "Create VM with gcloud",
+      "description": "Run: gcloud compute instances create gcelab2 --machine-type e2-medium --zone=$ZONE",
+      "type": "step"
+    }
+  ],
+  "commands": [
+    {
+      "cmd": "sudo apt-get update",
+      "purpose": "Updates package repository"
+    },
+    {
+      "cmd": "sudo apt-get install -y nginx",
+      "purpose": "Installs NGINX web server"
+    },
+    {
+      "cmd": "ps auwx | grep nginx",
+      "purpose": "Check if NGINX process is running"
+    },
+    {
+      "cmd": "gcloud auth list",
+      "purpose": "List active account"
+    },
+    {
+      "cmd": "gcloud config list project",
+      "purpose": "Show project ID"
+    },
+    {
+      "cmd": "gcloud compute instances list",
+      "purpose": "List all VMs"
+    },
+    {
+      "cmd": "gcloud compute instances create gcelab2 --machine-type e2-medium --zone=$ZONE",
+      "purpose": "Create VM via CLI"
+    }
+  ],
+  "viva": [
+    {
+      "question": "What is a VM?",
+      "answer": "A Virtual Machine (VM) is a compute resource that uses software instead of a physical computer to run programs and deploy apps."
+    },
+    {
+      "question": "How do you SSH into a VM in GCP?",
+      "answer": "Using the SSH button in the console or 'gcloud compute ssh' command."
+    }
+  ],
+  "notes": [
+    "Replace REGION and ZONE with the values provided in your lab (e.g., us-east1, us-east1-b)."
+  ]
+}

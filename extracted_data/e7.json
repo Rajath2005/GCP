@@ -1,0 +1,50 @@
+{
+  "id": "e7",
+  "title": "Pub/Sub: Qwik Start – Console",
+  "aim": "To set up a Pub/Sub topic and subscription, publish messages, and view them using the Google Cloud Console.",
+  "steps": [
+    {
+      "title": "Set Up Pub/Sub (Create a Topic)",
+      "description": "Go to Pub/Sub > Topics. Click Create Topic. Topic ID: MyTopic. Click Create.",
+      "type": "step"
+    },
+    {
+      "title": "Add a Subscription",
+      "description": "Inside 'MyTopic', click Create Subscription. Subscription ID: MySub. Delivery type: Pull. Click Create.",
+      "type": "step"
+    },
+    {
+      "title": "Publish a Message",
+      "description": "In the Topic details, click Publish Message. Type 'Hello World' and click Publish.",
+      "type": "step"
+    },
+    {
+      "title": "View the Message",
+      "description": "Go to Subscriptions > MySub. Click the 'Messages' tab and then 'Pull'. Acknowledge the message.",
+      "type": "step"
+    }
+  ],
+  "commands": [
+    {
+      "cmd": "gcloud pubsub subscriptions pull --auto-ack MySub",
+      "purpose": "Pull and acknowledge messages from a subscription via CLI"
+    }
+  ],
+  "viva": [
+    {
+      "question": "What is Pub/Sub?",
+      "answer": "It stands for Publisher/Subscriber. It is an asynchronous messaging service that decouples services that produce events from services that process events."
+    },
+    {
+      "question": "What is a Topic?",
+      "answer": "A named resource where publishers send messages."
+    },
+    {
+      "question": "What is the difference between Pull and Push delivery?",
+      "answer": "In Pull delivery, the subscriber requests messages from the service. In Push delivery, Pub/Sub sends messages to a predefined HTTP endpoint."
+    }
+  ],
+  "notes": [
+    "Each message must be acknowledged within the ackDeadlineSeconds window, otherwise it is re-delivered."
+  ]
+}

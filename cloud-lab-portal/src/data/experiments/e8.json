@@ -1,0 +1,36 @@
+{
+  "id": "e8",
+  "title": "VPC Networking",
+  "aim": "To explore custom VPC networks, firewall rules, and VPC network peering.",
+  "sourceUrl": "https://www.skills.google/focuses/1229?parent=catalog",
+  "tasks": [
+    {
+      "title": "Custom VPC and VM Setup",
+      "steps": [
+        { "description": "Navigate to VPC Network > VPC networks in the Cloud Console." },
+        { "description": "Create a VPC named 'mynetwork' with 'Automatic' subnet mode." },
+        { "description": "Create two VM instances: 'mynet-us-vm' in us-east1 and 'mynet-eu-vm' in europe-west1." },
+        { "description": "Ensure ICMP and SSH firewall rules are enabled for the network." }
+      ]
+    },
+    {
+      "title": "VPC Network Peering",
+      "steps": [
+        { "description": "Create a second VPC named 'privatenet' with a custom subnet." },
+        { "description": "Establish a peering connection from 'mynetwork' to 'privatenet'." },
+        { "description": "Establish the return peering connection from 'privatenet' to 'mynetwork'." },
+        { "description": "SSH into a VM in 'mynetwork' and ping a VM in 'privatenet' using its INTERNAL IP to verify connectivity." }
+      ]
+    }
+  ],
+  "commands": [
+    { "cmd": "ping [INTERNAL_IP]", "purpose": "Tests internal network connectivity" },
+    { "cmd": "gcloud compute networks peerings create", "purpose": "Creates VPC peering connection" }
+  ],
+  "viva": [
+    { "question": "What is VPC Peering?", "answer": "A mechanism that allows internal IP address connectivity across two VPC networks." },
+    { "question": "Is peering transitive?", "answer": "No, if A peers with B and B peers with C, A does not automatically peer with C." }
+  ],
+  "result": "Successfully established cross-region and cross-network connectivity using VPCs and Peering.",
+  "conclusion": "Learned the fundamentals of cloud networking and secure internal communication."
+}

@@ -1,0 +1,51 @@
+{
+  "id": "e3",
+  "title": "Cloud Run Functions",
+  "aim": "To create and deploy 2nd generation Cloud Run functions triggered by HTTP and Cloud Storage.",
+  "sourceUrl": "https://www.skills.google/focuses/49757?parent=catalog",
+  "tasks": [
+    {
+      "title": "Enable Required APIs",
+      "steps": [
+        { "description": "Open Cloud Shell and enable the necessary services for Cloud Functions and Eventarc." },
+        { 
+          "description": "Run the enablement command.",
+          "command": "gcloud services enable artifactregistry.googleapis.com cloudfunctions.googleapis.com cloudbuild.googleapis.com eventarc.googleapis.com run.googleapis.com logging.googleapis.com pubsub.googleapis.com cloudaicompanion.googleapis.com"
+        }
+      ]
+    },
+    {
+      "title": "Create and Deploy an HTTP Function",
+      "steps": [
+        { "description": "Create a directory for the function code.", "command": "mkdir ~/hello-http && cd ~/hello-http" },
+        { "description": "Create an 'index.js' file with the function logic." },
+        { 
+          "description": "Deploy the function to Cloud Run (2nd Gen).",
+          "command": "gcloud functions deploy nodejs-http-function --gen2 --runtime nodejs22 --entry-point helloWorld --trigger-http --region [REGION] --timeout 600s --max-instances 1"
+        },
+        { "description": "Verify the deployment by visiting the generated Trigger URL." }
+      ]
+    },
+    {
+      "title": "Create a Cloud Storage Triggered Function",
+      "steps": [
+        { "description": "Create a globally unique Cloud Storage bucket.", "command": "gsutil mb -l [REGION] gs://gcf-gen2-storage-[PROJECT_ID]" },
+        { 
+          "description": "Deploy the storage-triggered function.",
+          "command": "gcloud functions deploy nodejs-storage-function --gen2 --runtime nodejs22 --entry-point helloStorage --trigger-bucket gs://gcf-gen2-storage-[PROJECT_ID] --region [REGION]"
+        },
+        { "description": "Test by uploading a file to the bucket and checking logs.", "command": "echo \"Hello World\" > test.txt\ngsutil cp test.txt gs://gcf-gen2-storage-[PROJECT_ID]" }
+      ]
+    }
+  ],
+  "commands": [
+    { "cmd": "gcloud functions deploy ... --gen2", "purpose": "Deploy a 2nd generation function" },
+    { "cmd": "gsutil mb gs://[BUCKET]", "purpose": "Create a storage bucket" }
+  ],
+  "viva": [
+    { "question": "What is Cloud Run Functions?", "answer": "A serverless execution environment for building and connecting cloud services." },
+    { "question": "Difference between 1st and 2nd gen?", "answer": "2nd gen is built on top of Cloud Run and Eventarc, offering longer timeouts and better performance." }
+  ],
+  "result": "Successfully deployed HTTP and Storage triggered serverless functions.",
+  "conclusion": "Understood the event-driven architecture of Cloud Functions."
+}

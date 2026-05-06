@@ -1,0 +1,42 @@
+{
+  "id": "e10",
+  "title": "GKE CI/CD Pipeline",
+  "aim": "To build a complete CI/CD pipeline using Google Kubernetes Engine, Artifact Registry, and Cloud Build.",
+  "sourceUrl": "https://www.skills.google/focuses/52829?parent=catalog",
+  "tasks": [
+    {
+      "title": "Prepare Infrastructure",
+      "steps": [
+        { "description": "Enable GKE, Cloud Build, and Artifact Registry APIs." },
+        { "description": "Create an Artifact Registry repository for Docker images.", "command": "gcloud artifacts repositories create my-repo --repository-format=docker --location=[REGION]" },
+        { "description": "Create a GKE cluster to host your application.", "command": "gcloud container clusters create hello-cluster --num-nodes=2 --zone=[ZONE]" }
+      ]
+    },
+    {
+      "title": "Setup CI Pipeline",
+      "steps": [
+        { "description": "Prepare a 'cloudbuild.yaml' file that defines build and push steps." },
+        { "description": "Manually submit a build to verify the configuration.", "command": "gcloud builds submit --tag [REGION]-docker.pkg.dev/[PROJECT_ID]/my-repo/hello-app:v1 ." },
+        { "description": "Create a Cloud Build Trigger linked to your GitHub repository." }
+      ]
+    },
+    {
+      "title": "Setup CD Pipeline",
+      "steps": [
+        { "description": "Create a deployment manifest (kubernetes-deploy.yaml)." },
+        { "description": "Add a CD step to your pipeline that applies the manifest to the GKE cluster.", "command": "kubectl apply -f kubernetes-deploy.yaml" },
+        { "description": "Push a code change to GitHub and verify that the pipeline automatically builds and deploys the new version." }
+      ]
+    }
+  ],
+  "commands": [
+    { "cmd": "gcloud builds submit", "purpose": "Manually triggers a Cloud Build" },
+    { "cmd": "kubectl apply -f", "purpose": "Deploys resources to a Kubernetes cluster" }
+  ],
+  "viva": [
+    { "question": "What is Cloud Build?", "answer": "A serverless CI/CD platform that executes your builds on Google Cloud infrastructure." },
+    { "question": "What is Artifact Registry?", "answer": "A managed service for storing, managing, and securing your build artifacts (like Docker images)." }
+  ],
+  "result": "Successfully automated the build and deployment process for a containerized application.",
+  "conclusion": "Learned the power of DevSecOps by automating the full software delivery lifecycle."
+}

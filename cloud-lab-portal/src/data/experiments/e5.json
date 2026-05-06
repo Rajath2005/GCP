@@ -1,0 +1,35 @@
+{
+  "id": "e5",
+  "title": "Cloud Storage",
+  "aim": "To manage objects and buckets using both the Cloud Console and gcloud CLI.",
+  "sourceUrl": "https://www.skills.google/focuses/569?parent=catalog",
+  "tasks": [
+    {
+      "title": "Bucket Operations via CLI",
+      "steps": [
+        { "description": "Create a new bucket (must be globally unique).", "command": "gcloud storage buckets create gs://<YOUR-BUCKET-NAME>" },
+        { "description": "Download an image locally.", "command": "curl https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Ada_Lovelace_portrait.jpg/800px-Ada_Lovelace_portrait.jpg --output ada.jpg" },
+        { "description": "Upload the image to your bucket.", "command": "gcloud storage cp ada.jpg gs://<YOUR-BUCKET-NAME>" },
+        { "description": "List the contents of your bucket.", "command": "gcloud storage ls gs://<YOUR-BUCKET-NAME>" }
+      ]
+    },
+    {
+      "title": "Access Control and Public Sharing",
+      "steps": [
+        { "description": "Make the object publicly readable.", "command": "gcloud storage objects update gs://<YOUR-BUCKET-NAME>/ada.jpg --add-acl-grant=entity=allUsers,role=READER" },
+        { "description": "Verify public access by opening the Public URL in an incognito window." },
+        { "description": "Remove public access.", "command": "gcloud storage objects update gs://<YOUR-BUCKET-NAME>/ada.jpg --remove-acl-grant=allUsers" }
+      ]
+    }
+  ],
+  "commands": [
+    { "cmd": "gcloud storage buckets create", "purpose": "Creates a new bucket" },
+    { "cmd": "gcloud storage cp", "purpose": "Copies files to/from buckets" }
+  ],
+  "viva": [
+    { "question": "What is a Bucket?", "answer": "A basic container that holds your data in Cloud Storage." },
+    { "question": "Is bucket name globally unique?", "answer": "Yes, it must be unique across the entire Google Cloud ecosystem." }
+  ],
+  "result": "Successfully performed bucket creation, file upload, and access control management.",
+  "conclusion": "Learned how to use Cloud Storage for durable and scalable object storage."
+}

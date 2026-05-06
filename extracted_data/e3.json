@@ -1,0 +1,67 @@
+{
+  "id": "e3",
+  "title": "Cloud Run Functions: Qwik Start",
+  "aim": "To create Cloud Run Functions that respond to HTTP calls, Cloud Storage events, and Cloud Audit Logs, and explore advanced settings like revisions, minimum instances, and concurrency.",
+  "steps": [
+    {
+      "title": "Enable the Required APIs",
+      "description": "Go to APIs & Services > Enable APIs. Enable: Cloud Run, Cloud Functions, Cloud Build, Artifact Registry, Eventarc APIs.",
+      "type": "step"
+    },
+    {
+      "title": "Create an HTTP Function",
+      "description": "Create directory, write main.py and requirements.txt, then deploy using gcloud functions deploy.",
+      "type": "step"
+    },
+    {
+      "title": "Create a Cloud Storage Function",
+      "description": "Create a GCS bucket, write function code, and deploy with a storage trigger (google.cloud.storage.object.v1.finalized).",
+      "type": "step"
+    },
+    {
+      "title": "Deploy Multiple Revisions",
+      "description": "Redeploy the function with an environment variable to create a new revision. Check traffic split in Console.",
+      "type": "step"
+    },
+    {
+      "title": "Configure Scalability",
+      "description": "Set minimum instances and concurrency using 'gcloud run services update'.",
+      "type": "step"
+    }
+  ],
+  "commands": [
+    {
+      "cmd": "gcloud functions deploy hello-http --gen2 --runtime=python311 --trigger-http --allow-unauthenticated",
+      "purpose": "Deploy an HTTP Cloud Function (Gen2)"
+    },
+    {
+      "cmd": "gcloud functions call hello-http --region=REGION --gen2",
+      "purpose": "Test/Invoke the deployed function"
+    },
+    {
+      "cmd": "gsutil mb -l REGION gs://YOUR_PROJECT_ID-bucket",
+      "purpose": "Create a Cloud Storage bucket"
+    },
+    {
+      "cmd": "gcloud run services update hello-http --min-instances=1 --region=REGION",
+      "purpose": "Set minimum instances to reduce cold starts"
+    },
+    {
+      "cmd": "gcloud run services update hello-http --concurrency=50 --region=REGION",
+      "purpose": "Set concurrency (requests per instance)"
+    }
+  ],
+  "viva": [
+    {
+      "question": "What are Cloud Run Functions?",
+      "answer": "They are a serverless execution environment for building and connecting cloud services."
+    },
+    {
+      "question": "What is the benefit of Gen2 functions?",
+      "answer": "Gen2 functions are built on Cloud Run and Eventarc, offering longer timeouts, larger instance sizes, and better concurrency."
+    }
+  ],
+  "notes": [
+    "Cloud Run Functions (Gen2) are powered by Cloud Run, supporting up to 1000 concurrent requests, 60-min HTTP timeout, and up to 16GB RAM."
+  ]
+}

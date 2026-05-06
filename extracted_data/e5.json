@@ -1,0 +1,68 @@
+{
+  "id": "e5",
+  "title": "Cloud Storage: Qwik Start – CLI/SDK & Console",
+  "aim": "To create Cloud Storage buckets, upload/download objects, manage folders, and control access using gsutil CLI and the Google Cloud Console.",
+  "steps": [
+    {
+      "title": "Part A: Using CLI/SDK (gsutil)",
+      "description": "Perform storage operations using the Cloud Shell.",
+      "type": "heading"
+    },
+    {
+      "title": "Create a Bucket",
+      "description": "Use 'gsutil mb' to create a bucket. Note: bucket names must be globally unique.",
+      "type": "step"
+    },
+    {
+      "title": "Upload and Manage Objects",
+      "description": "Use 'gsutil cp' to upload/download and 'gsutil ls' to list contents.",
+      "type": "step"
+    },
+    {
+      "title": "Public Access Control",
+      "description": "Use 'gsutil acl ch' to make an object public or remove public access.",
+      "type": "step"
+    },
+    {
+      "title": "Part B: Using Google Cloud Console",
+      "description": "Perform same operations via the GUI.",
+      "type": "heading"
+    },
+    {
+      "title": "GUI Operations",
+      "description": "Go to Cloud Storage > Buckets. Click Create. Use 'Upload Files' button and 'Permissions' tab for access control.",
+      "type": "step"
+    }
+  ],
+  "commands": [
+    {
+      "cmd": "gsutil mb gs://YOUR_BUCKET_NAME",
+      "purpose": "Create a new Cloud Storage bucket"
+    },
+    {
+      "cmd": "gsutil cp ada.jpg gs://YOUR_BUCKET_NAME",
+      "purpose": "Upload a file to the bucket"
+    },
+    {
+      "cmd": "gsutil ls gs://YOUR_BUCKET_NAME",
+      "purpose": "List objects in the bucket"
+    },
+    {
+      "cmd": "gsutil acl ch -u AllUsers:R gs://YOUR_BUCKET_NAME/ada.jpg",
+      "purpose": "Make an object publicly readable"
+    }
+  ],
+  "viva": [
+    {
+      "question": "Difference between object and bucket?",
+      "answer": "A bucket is a container for data (like a folder/drive), and an object is the individual file stored within it."
+    },
+    {
+      "question": "Why bucket name must be unique?",
+      "answer": "Bucket names are used in the global DNS namespace (e.g., storage.googleapis.com/bucket-name), so they must be unique across all Google Cloud users."
+    }
+  ],
+  "notes": [
+    "gsutil is the CLI tool for Cloud Storage. 'gs://' is the URI prefix for GCS buckets."
+  ]
+}

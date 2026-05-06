@@ -1,0 +1,64 @@
+{
+  "id": "e4",
+  "title": "App Engine: Qwik Start – Python & Flask",
+  "aim": "To deploy a Python web application to Google App Engine using standard and flexible environments.",
+  "steps": [
+    {
+      "title": "Part A: App Engine Standard",
+      "description": "Deploy a simple app using the standard environment.",
+      "type": "heading"
+    },
+    {
+      "title": "Enable App Engine Admin API",
+      "description": "Go to APIs & Services > Library. Search for and enable 'App Engine Admin API'.",
+      "type": "step"
+    },
+    {
+      "title": "Download and Test App",
+      "description": "Clone the sample repo, navigate to the hello_world folder, and run 'dev_appserver.py' to test locally.",
+      "type": "step"
+    },
+    {
+      "title": "Deploy the App",
+      "description": "Run 'gcloud app deploy' and choose a region to deploy the app to the cloud.",
+      "type": "step"
+    },
+    {
+      "title": "Part B: App Engine Flexible",
+      "description": "Deploy a Flask app using the flexible environment.",
+      "type": "heading"
+    },
+    {
+      "title": "Deploy Flexible App",
+      "description": "Clone the flexible sample, review app.yaml (env: flex), and run 'gcloud app deploy'.",
+      "type": "step"
+    }
+  ],
+  "commands": [
+    {
+      "cmd": "gcloud app deploy",
+      "purpose": "Deploy your application to App Engine"
+    },
+    {
+      "cmd": "gcloud app browse",
+      "purpose": "Open the deployed application in your browser"
+    },
+    {
+      "cmd": "dev_appserver.py app.yaml",
+      "purpose": "Run the App Engine app locally for testing"
+    }
+  ],
+  "viva": [
+    {
+      "question": "Difference between App Engine Standard and Flexible?",
+      "answer": "Standard is for specific languages with fast scaling and scaling to zero. Flexible supports custom runtimes via Docker and is better for apps with consistent traffic."
+    },
+    {
+      "question": "What is app.yaml?",
+      "answer": "It is the configuration file for App Engine that defines the runtime, environment, and handlers for the application."
+    }
+  ],
+  "notes": [
+    "App Engine Standard is for Python/Java/Go/Node apps with fast scaling. Flexible supports custom runtimes via Docker containers."
+  ]
+}

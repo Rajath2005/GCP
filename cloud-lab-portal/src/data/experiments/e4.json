@@ -1,0 +1,39 @@
+{
+  "id": "e4",
+  "title": "App Engine",
+  "aim": "To deploy a Python application to both Standard and Flexible App Engine environments.",
+  "sourceUrl": "https://www.skills.google/focuses/1014?parent=catalog",
+  "tasks": [
+    {
+      "title": "Deploy to App Engine Standard",
+      "steps": [
+        { "description": "Enable the App Engine Admin API in the API Library." },
+        { "description": "Clone the sample repository in Cloud Shell.", "command": "git clone https://github.com/GoogleCloudPlatform/python-docs-samples.git\ncd python-docs-samples/appengine/standard_python3/hello_world" },
+        { "description": "Deploy the application.", "command": "gcloud app deploy" },
+        { "description": "View the live application.", "command": "gcloud app browse" }
+      ]
+    },
+    {
+      "title": "Deploy to App Engine Flexible",
+      "steps": [
+        { "description": "Download the flexible environment sample code.", "command": "gcloud storage cp -r gs://spls/gsp023/flex_and_vision/ ." },
+        { "description": "Create a Cloud Storage bucket for the app.", "command": "gsutil mb gs://${PROJECT_ID}" },
+        { "description": "Update 'app.yaml' with your bucket name." },
+        { 
+          "description": "Deploy the application to the Flexible environment (this may take several minutes).",
+          "command": "gcloud app deploy"
+        }
+      ]
+    }
+  ],
+  "commands": [
+    { "cmd": "gcloud app deploy", "purpose": "Deploys application to App Engine" },
+    { "cmd": "gcloud app browse", "purpose": "Opens the deployed app in a browser" }
+  ],
+  "viva": [
+    { "question": "Standard vs Flexible environment?", "answer": "Standard uses specific runtimes and scales to zero. Flexible uses Docker containers and offers more customization." },
+    { "question": "What is app.yaml?", "answer": "A configuration file that describes your app's deployment settings for App Engine." }
+  ],
+  "result": "Successfully deployed Python web applications to both App Engine environments.",
+  "conclusion": "Learned the differences between serverless managed hosting (Standard) and container-based hosting (Flexible)."
+}

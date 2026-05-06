@@ -1,0 +1,67 @@
+{
+  "id": "e10",
+  "title": "GKE Pipeline using Cloud Build (CI/CD)",
+  "aim": "To create a CI/CD pipeline that builds Docker images with Cloud Build, stores them in Artifact Registry, and deploys to Google Kubernetes Engine (GKE) automatically.",
+  "steps": [
+    {
+      "title": "Initialize the Lab",
+      "description": "Enable APIs (GKE, Cloud Build, Artifact Registry). Create a Docker repository in Artifact Registry and a GKE cluster.",
+      "type": "step"
+    },
+    {
+      "title": "Set Up Repositories",
+      "description": "Create Cloud Source Repositories for the app code and the environment config. Clone the sample app code.",
+      "type": "step"
+    },
+    {
+      "title": "Build Container Image",
+      "description": "Use 'gcloud builds submit' to build a Docker image from the source code and push it to Artifact Registry.",
+      "type": "step"
+    },
+    {
+      "title": "Configure CI Pipeline",
+      "description": "Create a Cloud Build trigger that runs whenever code is pushed to the repository. The build is defined in 'cloudbuild.yaml'.",
+      "type": "step"
+    },
+    {
+      "title": "Deploy to GKE (CD)",
+      "description": "Create a CD pipeline that applies the Kubernetes manifests to the GKE cluster using 'kubectl apply'.",
+      "type": "step"
+    }
+  ],
+  "commands": [
+    {
+      "cmd": "gcloud artifacts repositories create my-repository --repository-format=docker --location=$REGION",
+      "purpose": "Create a Docker repository in Artifact Registry"
+    },
+    {
+      "cmd": "gcloud container clusters create hello-cloudbuild --num-nodes 1 --region $REGION",
+      "purpose": "Create a managed Kubernetes cluster"
+    },
+    {
+      "cmd": "gcloud builds submit --tag $REGION-docker.pkg.dev/$PROJECT_ID/my-repository/hello-cloudbuild:latest",
+      "purpose": "Manually trigger a build and push to Artifact Registry"
+    },
+    {
+      "cmd": "kubectl apply -f kubernetes.yaml",
+      "purpose": "Deploy/Update application on Kubernetes cluster"
+    }
+  ],
+  "viva": [
+    {
+      "question": "What is CI/CD?",
+      "answer": "Continuous Integration (CI) is the practice of automating the building and testing of code. Continuous Deployment (CD) automates the delivery of that code to a production-like environment."
+    },
+    {
+      "question": "What is Cloud Build?",
+      "answer": "A serverless build service that executes builds on Google Cloud. It can build Docker images, binaries, and more."
+    },
+    {
+      "question": "What is Artifact Registry?",
+      "answer": "A managed service for storing and managing build artifacts like Docker images and language packages (Maven, npm)."
+    }
+  ],
+  "notes": [
+    "The pipeline is often triggered by a git push to a specific branch."
+  ]
+}

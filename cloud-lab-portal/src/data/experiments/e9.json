@@ -1,0 +1,43 @@
+{
+  "id": "e9",
+  "title": "Cloud Monitoring",
+  "aim": "To monitor VM health using uptime checks, alerting policies, and custom dashboards.",
+  "sourceUrl": "https://www.skills.google/focuses/10599?parent=catalog",
+  "tasks": [
+    {
+      "title": "Setup VM and Ops Agent",
+      "steps": [
+        { "description": "Create a VM instance with 'Allow HTTP traffic' enabled." },
+        { "description": "SSH into the VM and install Apache.", "command": "sudo apt-get update\nsudo apt-get install apache2 php -y" },
+        { "description": "Install the Google Cloud Ops Agent to gather system-level metrics.", "command": "curl -sSO https://dl.google.com/cloudagents/add-google-cloud-ops-agent-repo.sh\nsudo bash add-google-cloud-ops-agent-repo.sh --also-install" }
+      ]
+    },
+    {
+      "title": "Uptime Checks and Alerting",
+      "steps": [
+        { "description": "Navigate to Monitoring > Uptime checks and click 'Create Uptime Check'." },
+        { "description": "Set Target to 'Instance', Protocol to 'HTTP', and path to '/'." },
+        { "description": "Navigate to Monitoring > Alerting and click 'Create Policy'." },
+        { "description": "Define a condition for 'Network Traffic' (e.g., > 500 bytes/sec) and set a notification channel (Email)." }
+      ]
+    },
+    {
+      "title": "Create a Custom Dashboard",
+      "steps": [
+        { "description": "Navigate to Monitoring > Dashboards and click 'Create Dashboard'." },
+        { "description": "Add a Line Chart widget for 'CPU Usage' and another for 'Received Packets'." },
+        { "description": "Configure the charts to monitor your specific VM instance." }
+      ]
+    }
+  ],
+  "commands": [
+    { "cmd": "sudo apt-get install apache2", "purpose": "Installs a web server to monitor" },
+    { "cmd": "sudo bash add-google-cloud-ops-agent-repo.sh", "purpose": "Installs the Monitoring & Logging agent" }
+  ],
+  "viva": [
+    { "question": "What is an Uptime Check?", "answer": "A tool that periodically checks if a web server or other network-accessible resource is reachable." },
+    { "question": "Purpose of Ops Agent?", "answer": "To collect telemetry like CPU, memory, and disk metrics from your VM instances." }
+  ],
+  "result": "Successfully configured proactive monitoring and alerting for cloud resources.",
+  "conclusion": "Understood the importance of observability in maintaining high availability."
+}
